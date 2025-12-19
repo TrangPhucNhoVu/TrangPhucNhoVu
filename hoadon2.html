@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu Giao Hàng A4 - Trang Phục Biểu Diễn Nhớ Vũ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Firebase (Compat SDK) - required for `firebase-config.js` to create `db` -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #e5e7eb; /* Màu nền xám nhạt cho body */
+        }
+        .font-calligraphy {
+            font-family: 'Dancing Script', cursive;
+        }
+        .a4-container {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm;
+            margin: 1rem auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background: white;
+        }
+        .input-field {
+            border-bottom: 1px dotted #000;
+            padding: 2px 4px;
+            background-color: transparent;
+        }
+        .input-field:focus {
+            outline: none;
+            border-bottom: 1px solid #000;
+        }
+        .table-cell {
+            border: 1px solid #000;
+            padding: 6px;
+            text-align: center;
+        }
+        .header-cell {
+            border: 1px solid #000;
+            padding: 6px;
+            text-align: center;
+            font-weight: bold;
+            background-color: #f3f4f6;
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body {
+                background-color: #fff;
+                margin: 0;
+            }
+            .no-print {
+                display: none;
+            }
+            .a4-container {
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+                padding: 10mm; /* Giảm padding khi in để vừa lề */
+            }
+            body, .print-text-base {
+                font-size: 10pt;
+            }
+            .print-text-sm {
+                 font-size: 9pt;
+            }
+            .print-text-xs {
+                 font-size: 8pt;
+            }
+            .print-header-main {
+                font-size: 32pt !important;
+            }
+            .print-header-sub {
+                font-size: 16pt !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Status / errors (hidden when printing) -->
+    <div id="loadStatus" class="no-print" style="max-width: 210mm; margin: 0 auto 10px; padding: 10px 12px; border-radius: 8px; background: #fff3cd; color: #664d03; border: 1px solid #ffecb5; display: none;"></div>
+
+    <div class="a4-container">
+        <!-- Header -->
+        <header class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4 mb-4 pb-3 border-b">
+            <!-- Left: Logo -->
+            <div class="justify-self-start">
+                 <!-- SVG Logo Hoa Sen Cách Điệu với Bàn Tay -->
+                <svg viewBox="0 0 200 200" class="w-28 h-28 object-contain">
+                    <g>
+                        <!-- Hands (Green) - Styled to look like they are lifting -->
+                        <path d="M 20,150 C 40,100 85,90 95,140 C 65,150 35,155 20,150 Z" fill="#5eead4" stroke="#2dd4bf" stroke-width="0.5" />
+                        <path d="M 180,150 C 160,100 115,90 105,140 C 135,150 165,155 180,150 Z" fill="#5eead4" stroke="#2dd4bf" stroke-width="0.5" />
+
+                        <!-- Lotus Petals (Pink) - Bigger and higher -->
+                        <path d="M 100,30 C 70,55 60,105 100,135 C 140,105 130,55 100,30 Z" fill="#f9a8d4" />
+                        <path d="M 75,45 C 50,65 50,105 80,130 C 75,95 65,65 75,45 Z" fill="#f472b6" />
+                        <path d="M 125,45 C 150,65 150,105 120,130 C 125,95 135,65 125,45 Z" fill="#f472b6" />
+                        <path d="M 100,60 C 85,80 80,110 100,128 C 120,110 115,80 100,60 Z" fill="#ec4899" />
+                        <path d="M 88,70 C 78,85 78,110 93,125 C 88,105 83,85 88,70 Z" fill="#db2777" />
+                        <path d="M 112,70 C 122,85 122,110 107,125 C 112,105 117,85 112,70 Z" fill="#db2777" />
+                        <circle cx="100" cy="110" r="6" fill="#fdf2f8" />
+
+                        <!-- Text -->
+                        <text x="100" y="185" text-anchor="middle" font-family="Dancing Script, cursive" font-size="22" fill="#0d9488" font-weight="bold">
+                            Trang Phục Nhớ Vũ
+                        </text>
+                    </g>
+                </svg>
+            </div>
+            <!-- Shop Info -->
+            <div class="text-center">
+                <h1 class="font-calligraphy text-5xl font-bold bg-gradient-to-r from-yellow-500 to-red-600 text-transparent bg-clip-text print-header-main whitespace-nowrap">Trang Phục Nhớ Vũ</h1>
+                <p class="text-xs mt-2 print-text-sm">VPDD: 99/5/4 Huỳnh Văn Nghệ, P. An Hội Tây, TP HCM</p>
+                <p class="text-xs mt-1 print-text-sm">Địa chỉ cũ: 99/5/4 Huỳnh Văn Nghệ, Phường 12, Quận Gò Vấp, TP HCM</p>
+                <p class="text-xs mt-1 print-text-sm">SĐT/ZALO: 0986682494</p>
+            </div>
+            <!-- Right: Bank Info & QR -->
+            <div class="flex-shrink-0 text-right text-xs justify-self-end print-text-sm">
+                 <img src="https://img.vietqr.io/image/MB-0986682494-compact.png" alt="Mã QR Chuyển khoản" class="w-28 h-28 object-contain border rounded p-1 bg-white shadow-sm ml-auto">
+                 <p class="font-semibold mt-2">VŨ THỊ NHỚ - MB Bank</p>
+                 <p>STK: 0986682494</p>
+            </div>
+        </header>
+
+        <!-- Title -->
+        <h2 class="text-2xl font-bold text-center mb-6 uppercase print-header-sub">Phiếu Giao Hàng</h2>
+
+        <!-- Customer Info -->
+        <section class="grid grid-cols-2 gap-x-6 gap-y-3 mb-5 print-text-base">
+            <div class="flex items-center">
+                <label class="font-semibold w-32">Tên khách hàng:</label>
+                <input type="text" id="customer-name" class="input-field flex-grow">
+            </div>
+            <div class="flex items-center">
+                <label class="font-semibold w-20">Điện thoại:</label>
+                <input type="text" id="customer-phone" class="input-field flex-grow">
+            </div>
+            <div class="flex items-center col-span-2">
+                 <label class="font-semibold w-32">Địa chỉ:</label>
+                <input type="text" id="customer-address" class="input-field flex-grow">
+            </div>
+        </section>
+        
+        <!-- Items Table -->
+        <section class="mb-5">
+            <table class="w-full border-collapse print-text-base" id="items-table">
+                <thead>
+                    <tr>
+                        <th class="header-cell" style="width: 5%;">STT</th>
+                        <th class="header-cell" style="width: 45%;">TÊN SẢN PHẨM</th>
+                        <th class="header-cell" style="width: 10%;">SỐ LƯỢNG</th>
+                        <th class="header-cell" style="width: 15%;">ĐƠN GIÁ</th>
+                        <th class="header-cell" style="width: 15%;">TỔNG TIỀN</th>
+                        <th class="header-cell" style="width: 10%;">GHI CHÚ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- JS will generate rows here -->
+                </tbody>
+            </table>
+             <button id="addRowBtn" class="no-print mt-3 px-3 py-1.5 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 focus:outline-none">
+                Thêm dòng
+            </button>
+        </section>
+
+        <!-- Summary -->
+        <section class="grid grid-cols-2 gap-x-6 mb-5 print-text-base">
+            <div class="space-y-2">
+                <div class="flex items-center">
+                    <label class="font-semibold w-36">Ngày thuê:</label>
+                    <input type="text" id="rental-date" class="input-field flex-grow" placeholder="dd/mm/yyyy">
+                </div>
+                <div class="flex items-center">
+                    <label class="font-semibold w-36">Ngày trả:</label>
+                    <input type="text" id="return-date" class="input-field flex-grow" placeholder="Trước hh:mm dd/mm/yyyy">
+                </div>
+                 <div class="flex items-center">
+                    <label class="font-semibold w-36">Người lập phiếu:</label>
+                    <input type="text" id="invoice-creator" class="input-field flex-grow">
+                </div>
+            </div>
+            <div class="relative">
+                 <div class="grid grid-cols-[1fr_auto] items-center gap-y-2">
+                    <label class="font-bold text-base text-right pr-4">TỔNG CỘNG:</label>
+                    <span id="grand-total" class="font-bold text-base w-36 text-right pr-2">0</span>
+                    
+                    <label class="font-semibold text-right pr-4">Tiền cọc:</label>
+                    <input type="text" class="input-field w-36 text-right" id="deposit-amount" value="0">
+
+                    <label class="font-semibold text-right pr-4 whitespace-nowrap">Còn lại cần TT:</label>
+                    <span id="remaining-amount" class="font-bold text-base w-36 text-right pr-2">0</span>
+                </div>
+                <!-- Stamp -->
+                <div class="absolute top-full left-1/2 transform -translate-x-1/4 translate-y-2 -rotate-12 opacity-90 print:opacity-100">
+                    <div class="border-4 border-red-600 rounded-md py-2 px-4 text-red-600 text-center font-bold text-xs leading-tight uppercase tracking-wider">
+                        <p class="whitespace-nowrap">Chuyên may bán và cho thuê</p>
+                        <p class="whitespace-nowrap">Trang phục mầm non Nhớ Vũ</p>
+                        <p class="whitespace-nowrap">ĐT: 0986682494</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Notes -->
+        <section class="mt-6 pt-3 border-t border-dashed print-text-sm text-gray-700">
+            <h4 class="font-bold mb-1">Lưu ý:</h4>
+            <ul class="list-disc list-inside space-y-1">
+                <li>Quý khách gửi trả trang phục trễ 1 ngày phát sinh thêm 30% tổng bill.</li>
+                <li>Quý khách book ship trả đồ sau giờ hành chính (17h00 ) Shop sẽ xử lý kiểm và hoàn đơn sang ngày hôm sau.</li>
+                <li>Quý khách book ship GỬI - TRẢ đồ vui lòng thanh toán phí ship và gửi kèm hoá đơn ( Shop nhận tránh nhầm lẫn hàng của khách khác ).</li>
+            </ul>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="text-center mt-6 print-text-base">
+            <p class="font-bold">TRANG PHỤC BIỂU DIỄN NHỚ VŨ</p>
+            <p class="italic">CHÂN THÀNH CẢM ƠN VÀ KÍNH CHÚC SỨC KHỎE!</p>
+        </footer>
+    </div>
+
+    <div class="text-center my-6 no-print">
+        <button onclick="window.print()" class="px-8 py-3 bg-green-600 text-white font-bold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+            🖨️ In Phiếu
+        </button>
+    </div>
+
+    <script>
+        const tableBody = document.querySelector('#items-table tbody');
+        const addRowBtn = document.getElementById('addRowBtn');
+        const loadStatusEl = document.getElementById('loadStatus');
+
+        let rowCount = 0;
+
+        const formatCurrency = (value) => new Intl.NumberFormat('vi-VN').format(value || 0);
+        const parseCurrency = (value) => Number(String(value).replace(/[^0-9]/g, '')) || 0;
+
+        function setLoadStatus(message, type = 'warn') {
+            if (!loadStatusEl) return;
+            if (!message) {
+                loadStatusEl.style.display = 'none';
+                loadStatusEl.textContent = '';
+                return;
+            }
+            const styles = {
+                info: { bg: '#e7f1ff', border: '#b6d4fe', color: '#084298' },
+                warn: { bg: '#fff3cd', border: '#ffecb5', color: '#664d03' },
+                error: { bg: '#f8d7da', border: '#f5c2c7', color: '#842029' },
+                ok: { bg: '#d1e7dd', border: '#badbcc', color: '#0f5132' }
+            };
+            const s = styles[type] || styles.warn;
+            loadStatusEl.style.display = 'block';
+            loadStatusEl.style.background = s.bg;
+            loadStatusEl.style.borderColor = s.border;
+            loadStatusEl.style.color = s.color;
+            loadStatusEl.textContent = message;
+        }
+        
+        const createRow = () => {
+            rowCount++;
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="table-cell">${rowCount}</td>
+                <td class="table-cell"><input type="text" class="w-full text-left p-1 focus:outline-none bg-transparent"></td>
+                <td class="table-cell"><input type="number" class="w-16 text-center p-1 focus:outline-none quantity bg-transparent" value="1" min="0"></td>
+                <td class="table-cell"><input type="text" class="w-full text-right p-1 focus:outline-none unit-price bg-transparent" value="0"></td>
+                <td class="table-cell text-right font-semibold px-2 py-1 total">0</td>
+                <td class="table-cell"><input type="text" class="w-full text-left p-1 focus:outline-none bg-transparent"></td>
+            `;
+            tableBody.appendChild(row);
+        };
+
+        const calculateFinalPayment = () => {
+            const grandTotal = parseCurrency(document.getElementById('grand-total').textContent);
+            const depositAmount = parseCurrency(document.getElementById('deposit-amount').value);
+            const remaining = grandTotal - depositAmount;
+            document.getElementById('remaining-amount').textContent = formatCurrency(remaining > 0 ? remaining : 0);
+        };
+
+        const calculateTotals = () => {
+            let grandTotal = 0;
+            tableBody.querySelectorAll('tr').forEach(row => {
+                const quantity = parseInt(row.querySelector('.quantity').value) || 0;
+                const unitPrice = parseCurrency(row.querySelector('.unit-price').value);
+                
+                const total = quantity * unitPrice;
+                
+                row.querySelector('.total').textContent = formatCurrency(total);
+                grandTotal += total;
+            });
+            document.getElementById('grand-total').textContent = formatCurrency(grandTotal);
+            calculateFinalPayment();
+        };
+
+        tableBody.addEventListener('input', (e) => {
+            if (e.target.matches('.quantity') || e.target.matches('.unit-price')) {
+                calculateTotals();
+            }
+        });
+
+        tableBody.addEventListener('focusout', (e) => {
+            if(e.target.classList.contains('unit-price')){
+                e.target.value = formatCurrency(parseCurrency(e.target.value));
+                calculateTotals();
+            }
+        });
+
+        const depositEl = document.getElementById('deposit-amount');
+        depositEl.addEventListener('input', () => calculateFinalPayment());
+        depositEl.addEventListener('focusout', e => {
+            e.target.value = formatCurrency(parseCurrency(e.target.value));
+            calculateFinalPayment();
+        });
+
+        addRowBtn.addEventListener('click', createRow);
+
+        // Initial rows
+        for(let i = 0; i < 8; i++) {
+            createRow();
+        }
+
+        function getOrderId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('orderId') || localStorage.getItem('currentOrderId') || '';
+        }
+
+        function getLocalOrder() {
+            try {
+                return JSON.parse(localStorage.getItem('currentOrder') || '{}') || {};
+            } catch (e) {
+                return {};
+            }
+        }
+
+        async function getDbSafe() {
+            if (typeof waitForDb === 'function') return await waitForDb();
+            if (typeof db !== 'undefined' && db) return db;
+            if (typeof window !== 'undefined' && window.db) return window.db;
+            throw new Error('Firebase db chưa sẵn sàng');
+        }
+
+        async function loadOrderData() {
+            const orderId = getOrderId();
+            const localOrder = getLocalOrder();
+
+            if (orderId) {
+                setLoadStatus(`Đang tải đơn hàng ${orderId} từ Firebase...`, 'info');
+                try {
+                    const dbInstance = await getDbSafe();
+                    const doc = await dbInstance.collection('orders').doc(orderId).get();
+                    if (doc.exists) {
+                        const order = { id: doc.id, ...doc.data() };
+                        fillInvoice(order);
+                        setLoadStatus('', 'ok');
+                        return;
+                    }
+
+                    if (localOrder.items && localOrder.items.length > 0) {
+                        fillInvoice(localOrder);
+                        setLoadStatus('Không tìm thấy đơn trên Firebase, đang dùng dữ liệu tạm (localStorage).', 'warn');
+                        return;
+                    }
+
+                    setLoadStatus('Không tìm thấy đơn hàng. Vui lòng kiểm tra lại mã đơn hoặc tạo đơn từ trang chủ.', 'error');
+                    return;
+                } catch (error) {
+                    console.error('Lỗi tải đơn hàng:', error);
+                    if (localOrder.items && localOrder.items.length > 0) {
+                        fillInvoice(localOrder);
+                        setLoadStatus('Không tải được từ Firebase, đang dùng dữ liệu tạm (localStorage).', 'warn');
+                        return;
+                    }
+                    setLoadStatus('Không kết nối được Firebase để tải đơn hàng. Vui lòng kiểm tra mạng/cấu hình Firebase.', 'error');
+                    return;
+                }
+            }
+
+            if (localOrder.items && localOrder.items.length > 0) {
+                fillInvoice(localOrder);
+                setLoadStatus('', 'ok');
+                return;
+            }
+
+            setLoadStatus('Chưa có dữ liệu hóa đơn. Hãy tạo đơn từ trang chủ hoặc mở từ Admin (In Hóa Đơn).', 'warn');
+        }
+
+        function fillInvoice(order) {
+            // Điền thông tin khách hàng
+            document.getElementById('customer-name').value = order.customerName || '';
+            document.getElementById('customer-phone').value = order.customerPhone || '';
+            document.getElementById('customer-address').value = order.customerAddress || '';
+
+            // Xóa các dòng mặc định
+            tableBody.innerHTML = '';
+            rowCount = 0;
+
+            // Thêm các sản phẩm từ đơn hàng
+            if (order.items && order.items.length > 0) {
+                order.items.forEach((item) => {
+                    rowCount++;
+                    const row = document.createElement('tr');
+                    const itemPrice = typeof item.price === 'number' ? item.price : parseCurrency(item.price);
+                    const itemQuantity = typeof item.quantity === 'number' ? item.quantity : parseInt(item.quantity) || 1;
+                    row.innerHTML = `
+                        <td class="table-cell">${rowCount}</td>
+                        <td class="table-cell"><input type="text" class="w-full text-left p-1 focus:outline-none bg-transparent" value="${item.name || ''}" readonly></td>
+                        <td class="table-cell"><input type="number" class="w-16 text-center p-1 focus:outline-none quantity bg-transparent" value="${itemQuantity}" min="0"></td>
+                        <td class="table-cell"><input type="text" class="w-full text-right p-1 focus:outline-none unit-price bg-transparent" value="${formatCurrency(itemPrice)}"></td>
+                        <td class="table-cell text-right font-semibold px-2 py-1 total">${formatCurrency(itemPrice * itemQuantity)}</td>
+                        <td class="table-cell"><input type="text" class="w-full text-left p-1 focus:outline-none bg-transparent" value="${item.note || order.notes || ''}"></td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            // Tính tổng
+            calculateTotals();
+
+            // Điền ngày thuê
+            if (order.rentalDate) {
+                let date;
+                if (order.rentalDate.seconds) {
+                    date = new Date(order.rentalDate.seconds * 1000);
+                } else if (order.rentalDate instanceof Date) {
+                    date = order.rentalDate;
+                } else {
+                    date = new Date(order.rentalDate);
+                }
+                document.getElementById('rental-date').value = formatDateVN(date);
+            } else {
+                document.getElementById('rental-date').value = formatDateVN(new Date());
+            }
+
+            // Điền ngày trả
+            if (order.returnDate) {
+                let returnDate;
+                if (order.returnDate.seconds) {
+                    returnDate = new Date(order.returnDate.seconds * 1000);
+                } else if (order.returnDate instanceof Date) {
+                    returnDate = order.returnDate;
+                } else {
+                    returnDate = new Date(order.returnDate);
+                }
+                document.getElementById('return-date').value = `Trước 17:00 ${formatDateVN(returnDate)}`;
+            }
+
+            // Người lập phiếu
+            if (order.creator) {
+                document.getElementById('invoice-creator').value = order.creator;
+            }
+        }
+
+        function formatDateVN(date) {
+            if (!date) return '';
+            const d = date instanceof Date ? date : new Date(date);
+            const day = String(d.getDate()).padStart(2, '0');
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const year = d.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadOrderData();
+        });
+    </script>
+</body>
+</html>
