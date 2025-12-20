@@ -2077,15 +2077,15 @@
                         <div style="border-top: 1px solid #e0e0e0; padding-top: 8px; margin-top: 8px;">
                             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;">
                                 <div>
-                                    <div style="font-size: 9px; color: #666; margin-bottom: 2px;">Tồn</div>
+                                    <div style="font-size: 9px; color: #666; margin-bottom: 2px;">Tổng</div>
                                     <div style="font-size: 14px; font-weight: 800; color: #28a745;">${totalStock}</div>
                                 </div>
                                 <div>
-                                    <div style="font-size: 9px; color: #666; margin-bottom: 2px;">Thuê</div>
+                                    <div style="font-size: 9px; color: #666; margin-bottom: 2px;">Đang Thuê</div>
                                     <div style="font-size: 14px; font-weight: 800; color: #ffc107;">${product.renting || 0}</div>
                                 </div>
                                 <div>
-                                    <div style="font-size: 9px; color: #666; margin-bottom: 2px;">Sẵn</div>
+                                    <div style="font-size: 9px; color: #666; margin-bottom: 2px;">Tồn Kho</div>
                                     <div style="font-size: 14px; font-weight: 800; color: ${availableStock > 0 ? '#17a2b8' : '#dc3545'};">
                                         ${availableStock}
                                     </div>
@@ -2782,12 +2782,16 @@
                                 <div style="font-size: 12px; font-weight: 800; color: #c62828;">${formatMoney(product.rentPrice || 0)}</div>
                             </div>
                             <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
-                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Tồn</div>
+                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Tổng</div>
                                 <div style="font-size: 12px; font-weight: 800; color: #28a745;">${totalStock}</div>
                             </div>
                             <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
-                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Thuê</div>
+                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Đang Thuê</div>
                                 <div style="font-size: 12px; font-weight: 800; color: #ffc107;">${product.renting || 0}</div>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
+                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Tồn Kho</div>
+                                <div style="font-size: 12px; font-weight: 800; color: ${availableStock > 0 ? '#17a2b8' : '#dc3545'};">${availableStock}</div>
                             </div>
                         </div>
                         <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
@@ -3476,6 +3480,7 @@
                     }
                     
                     const totalStock = Object.values(p.sizes || {}).reduce((acc, curr) => acc + curr, 0);
+                    const availableStock = totalStock - (p.renting || 0);
                     const importPrice = p.importPrice || 0;
                     const rentPrice = p.rentPrice || 0;
                     const rentalCount = p.rentalCount || 0;
@@ -3488,6 +3493,7 @@
                         ...p,
                         model: model,
                         totalStock: totalStock,
+                        availableStock: availableStock,
                         importCost: importCost,
                         revenue: revenue,
                         profit: profit,
@@ -3545,7 +3551,7 @@
                             </div>
                             <div style="font-size: 9px; color: #999; margin-bottom: 6px;">Model: ${product.model} | ID: ${product.id || 'N/A'}</div>
                         </div>
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 10px;">
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px;">
                             <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
                                 <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Giá Vốn</div>
                                 <div style="font-size: 11px; font-weight: 800; color: #333;">${formatMoney(product.importPrice || 0)}</div>
@@ -3555,12 +3561,20 @@
                                 <div style="font-size: 11px; font-weight: 800; color: #c62828;">${formatMoney(product.rentPrice || 0)}</div>
                             </div>
                             <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
-                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Tồn</div>
+                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Tổng</div>
                                 <div style="font-size: 11px; font-weight: 800; color: #28a745;">${product.totalStock}</div>
                             </div>
                             <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
-                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Thuê</div>
-                                <div style="font-size: 11px; font-weight: 800; color: #ffc107;">${product.rentalCount || 0}</div>
+                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Đang Thuê</div>
+                                <div style="font-size: 11px; font-weight: 800; color: #ffc107;">${product.renting || 0}</div>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
+                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Đã Thuê</div>
+                                <div style="font-size: 11px; font-weight: 800; color: #ff9800;">${product.rentalCount || 0}</div>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
+                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Tồn Kho</div>
+                                <div style="font-size: 11px; font-weight: 800; color: ${product.availableStock > 0 ? '#17a2b8' : '#dc3545'};">${product.availableStock || 0}</div>
                             </div>
                         </div>
                         <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
