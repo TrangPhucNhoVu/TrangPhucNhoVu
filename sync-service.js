@@ -298,7 +298,30 @@ class SyncService {
         if (typeof db === 'undefined' || !db) {
             throw new Error('Firebase db chưa được khởi tạo!');
         }
-        const docRef = await db.collection('orders').add(order);
+        
+        // Tạo mã đơn theo format TPNV_XXXXXX (6 số random)
+        const randomId = Math.floor(100000 + Math.random() * 900000); // 6 số từ 100000-999999
+        const customOrderId = `TPNV_${randomId}`;
+        
+        // Kiểm tra xem mã đã tồn tại chưa
+        let finalOrderId = customOrderId;
+        let attempts = 0;
+        while (attempts < 10) {
+            const checkDoc = await db.collection('orders').doc(finalOrderId).get();
+            if (!checkDoc.exists) {
+                break; // Mã chưa tồn tại, dùng được
+            }
+            // Mã đã tồn tại, tạo lại
+            const newRandomId = Math.floor(100000 + Math.random() * 900000);
+            finalOrderId = `TPNV_${newRandomId}`;
+            attempts++;
+        }
+        
+        // Thêm orderIdNew vào order data
+        order.orderIdNew = finalOrderId;
+        
+        // Lưu với custom ID
+        await db.collection('orders').doc(finalOrderId).set(order);
         
         // Đồng bộ lên Google Sheets
         const useSheets = this._getSheetsEnabled();
@@ -310,7 +333,7 @@ class SyncService {
             }
         }
         
-        return docRef.id;
+        return finalOrderId;
     }
 
     // Cập nhật đơn hàng - đồng bộ cả 2 nơi

@@ -13,7 +13,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #fff8e1 0%, #ffe0b2 50%, #ffccbc 100%);
             color: #333;
             min-height: 100vh;
         }
@@ -25,7 +25,7 @@
             top: 0;
             width: 280px;
             height: 100vh;
-            background: linear-gradient(180deg, rgba(238, 77, 45, 0.95) 0%, rgba(212, 63, 31, 0.95) 100%);
+            background: linear-gradient(180deg, rgba(198, 40, 40, 0.95) 0%, rgba(183, 28, 28, 0.95) 100%);
             backdrop-filter: blur(10px);
             color: white;
             padding: 25px 0;
@@ -107,7 +107,7 @@
             transform: translateY(-2px);
         }
         .page-header h1 {
-            color: #ee4d2d;
+            color: #c62828;
             font-size: 28px;
         }
         .btn {
@@ -123,13 +123,13 @@
             font-size: 14px;
         }
         .btn-primary {
-            background: #ee4d2d;
+            background: #c62828;
             color: white;
         }
         .btn-primary:hover {
-            background: #d43f1f;
+            background: #b71c1c;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(238, 77, 45, 0.3);
+            box-shadow: 0 4px 8px rgba(198, 40, 40, 0.3);
         }
         .btn-secondary {
             background: #6c757d;
@@ -161,37 +161,60 @@
         /* Stats Cards */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
         .stat-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
+            padding: 25px;
+            border-radius: 15px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 20px;
             border: 1px solid rgba(255,255,255,0.3);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        .stat-card:hover::before {
+            left: 100%;
         }
         .stat-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 16px 48px rgba(0,0,0,0.2);
         }
+        .stat-card[onclick] {
+            cursor: pointer;
+        }
+        .stat-card[onclick]:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
         .stat-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 18px;
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 24px;
             color: white;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: all 0.3s;
+            flex-shrink: 0;
         }
         .stat-card:hover .stat-icon {
             transform: scale(1.1) rotate(5deg);
@@ -201,22 +224,20 @@
         .stat-icon.orange { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
         .stat-icon.purple { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
         .stat-info h3 {
-            font-size: 36px;
+            font-size: 28px;
             font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             transition: all 0.3s;
+            line-height: 1.2;
         }
         .stat-card:hover .stat-info h3 {
             transform: scale(1.05);
         }
         .stat-info p {
-            color: #666;
-            font-size: 15px;
+            color: #333;
+            font-size: 13px;
             font-weight: 500;
+            margin: 0;
         }
 
         /* Content Card */
@@ -291,6 +312,80 @@
         .badge-warning { background: #fff3cd; color: #856404; }
         .badge-danger { background: #f8d7da; color: #721c24; }
         .badge-info { background: #d1ecf1; color: #0c5460; }
+        .profit-positive {
+            color: #28a745;
+            font-weight: 700;
+        }
+        .profit-negative {
+            color: #dc3545;
+            font-weight: 700;
+        }
+
+        /* Chart Type Buttons */
+        .chart-type-btn {
+            padding: 10px 20px;
+            border: 2px solid #dee2e6;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            color: #495057;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .chart-type-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        .chart-type-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+        .chart-type-btn.active:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Chart Tooltip */
+        .chart-tooltip {
+            position: absolute;
+            background: white;
+            color: #333;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            pointer-events: none;
+            z-index: 1000;
+            white-space: nowrap;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            border: 1px solid #e2e8f0;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(-50%) translateY(-5px);
+        }
+        .chart-tooltip.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .chart-tooltip::before {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid white;
+        }
 
         /* Form */
         .form-grid {
@@ -325,7 +420,7 @@
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #ee4d2d;
+            border-color: #c62828;
         }
         .form-group textarea {
             resize: vertical;
@@ -352,10 +447,10 @@
             background: white;
             border-radius: 8px;
             width: 90%;
-            max-width: 800px;
-            max-height: 90vh;
+            max-width: 650px;
+            max-height: 85vh;
             overflow-y: auto;
-            padding: 30px;
+            padding: 20px;
             position: relative;
         }
         .modal-header {
@@ -367,7 +462,7 @@
             border-bottom: 2px solid #f0f0f0;
         }
         .modal-header h3 {
-            color: #ee4d2d;
+            color: #c62828;
             font-size: 24px;
         }
         .close-modal {
@@ -432,8 +527,8 @@
             transition: all 0.3s;
         }
         .tab.active {
-            color: #ee4d2d;
-            border-bottom-color: #ee4d2d;
+            color: #c62828;
+            border-bottom-color: #c62828;
         }
 
         /* Hidden */
@@ -470,7 +565,7 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
         .login-content h2 {
-            color: #ee4d2d;
+            color: #c62828;
             margin-bottom: 25px;
             text-align: center;
         }
@@ -485,7 +580,7 @@
         }
         .login-input:focus {
             outline: none;
-            border-color: #ee4d2d;
+            border-color: #c62828;
         }
 
         /* Image Upload - Unified */
@@ -502,11 +597,11 @@
             background: #fafafa;
         }
         .image-upload-area:hover {
-            border-color: #ee4d2d;
+            border-color: #c62828;
             background: #fff5f5;
         }
         .image-upload-area.dragover {
-            border-color: #ee4d2d;
+            border-color: #c62828;
             background: #fff5f5;
             border-style: solid;
             transform: scale(1.02);
@@ -537,7 +632,7 @@
             transition: all 0.3s;
         }
         .image-preview-item:hover {
-            border-color: #ee4d2d;
+            border-color: #c62828;
             transform: scale(1.05);
         }
         .image-preview-item img {
@@ -593,14 +688,14 @@
             transition: all 0.3s;
         }
         .image-option-btn:hover {
-            background: #ee4d2d;
+            background: #c62828;
             color: white;
-            border-color: #ee4d2d;
+            border-color: #c62828;
         }
         .image-option-btn.active {
-            background: #ee4d2d;
+            background: #c62828;
             color: white;
-            border-color: #ee4d2d;
+            border-color: #c62828;
         }
 
         /* Size Input */
@@ -628,7 +723,7 @@
         }
         .size-input-item input:focus {
             outline: none;
-            border-color: #ee4d2d;
+            border-color: #c62828;
         }
 
         /* Smooth Animations */
@@ -694,7 +789,7 @@
         }
         .progress-fill {
             height: 100%;
-            background: #ee4d2d;
+            background: #c62828;
             transition: width 0.3s;
             width: 0%;
         }
@@ -706,7 +801,7 @@
             top: 20px;
             left: 20px;
             z-index: 1001;
-            background: rgba(238, 77, 45, 0.95);
+            background: rgba(198, 40, 40, 0.95);
             backdrop-filter: blur(10px);
             color: white;
             border: none;
@@ -719,7 +814,7 @@
             transition: all 0.3s;
         }
         .menu-toggle:hover {
-            background: rgba(238, 77, 45, 1);
+            background: rgba(198, 40, 40, 1);
             transform: scale(1.1);
         }
         .menu-overlay {
@@ -737,6 +832,81 @@
         .menu-overlay.active {
             display: block;
             opacity: 1;
+        }
+        @media (max-width: 768px) {
+            .sidebar-menu a {
+                pointer-events: auto !important;
+                z-index: 1001;
+                position: relative;
+            }
+            
+            /* Chart responsive */
+            .chart-type-btn {
+                font-size: 11px !important;
+                padding: 8px 10px !important;
+                flex: 1 1 calc(50% - 5px) !important;
+                min-width: calc(50% - 5px) !important;
+            }
+            
+            .chart-type-btn i {
+                font-size: 12px !important;
+                margin-right: 4px !important;
+            }
+            
+            #revenueChartCard .content-card {
+                padding: 20px 15px !important;
+            }
+            
+            #revenueChartCard [style*="padding: 30px"] {
+                padding: 15px 10px !important;
+            }
+            
+            #revenueChartCard [style*="height: 450px"] {
+                height: 300px !important;
+                flex-direction: column !important;
+                gap: 10px !important;
+            }
+            
+            #yAxis {
+                min-width: 45px !important;
+                padding-right: 8px !important;
+                font-size: 9px !important;
+                border-right: none !important;
+                border-bottom: 1px solid #e0e0e0 !important;
+                padding-bottom: 8px !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                height: auto !important;
+                width: 100% !important;
+            }
+            
+            #chartLabels {
+                font-size: 9px !important;
+                padding-top: 5px !important;
+                flex-wrap: wrap !important;
+                gap: 2px !important;
+            }
+            
+            #chartLabels > div {
+                font-size: 8px !important;
+                flex: 0 0 auto !important;
+                min-width: 0 !important;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            #revenueChart {
+                height: 220px !important;
+            }
+            
+            #chartGrid {
+                bottom: 35px !important;
+            }
+            
+            .chart-tooltip {
+                font-size: 11px !important;
+                padding: 8px 12px !important;
+            }
         }
 
         @media (max-width: 768px) {
@@ -814,7 +984,7 @@
     <button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()">
         <i class="fas fa-bars"></i>
     </button>
-    <div class="menu-overlay" id="menuOverlay" onclick="toggleSidebar()"></div>
+    <div class="menu-overlay" id="menuOverlay"></div>
 
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
@@ -868,11 +1038,14 @@
                     <button class="btn btn-secondary" onclick="checkGoogleSheetData()" style="margin-left: 10px;">
                         <i class="fas fa-clipboard-check"></i> Kiểm Tra Sheet
                     </button>
+                    <button class="btn btn-secondary" onclick="migrateOrderIds()" style="margin-left: 10px; background: #ff9800; border-color: #ff9800;">
+                        <i class="fas fa-sync"></i> Đổi Mã Đơn Cũ
+                    </button>
                 </div>
             </div>
 
             <div class="stats-grid">
-                <div class="stat-card">
+                <div class="stat-card" onclick="navigateToProducts()" style="cursor: pointer;">
                     <div class="stat-icon blue">
                         <i class="fas fa-box"></i>
                     </div>
@@ -881,7 +1054,7 @@
                         <p>Tổng Sản Phẩm</p>
                     </div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" onclick="navigateToOrders()" style="cursor: pointer;">
                     <div class="stat-icon green">
                         <i class="fas fa-shopping-cart"></i>
                     </div>
@@ -890,7 +1063,7 @@
                         <p>Tổng Đơn Hàng</p>
                     </div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" onclick="navigateToRevenue()" style="cursor: pointer;">
                     <div class="stat-icon orange">
                         <i class="fas fa-dollar-sign"></i>
                     </div>
@@ -899,7 +1072,7 @@
                         <p>Tổng Doanh Thu</p>
                     </div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" onclick="navigateToPendingOrders()" style="cursor: pointer;">
                     <div class="stat-icon purple">
                         <i class="fas fa-users"></i>
                     </div>
@@ -911,23 +1084,9 @@
             </div>
 
             <div class="content-card">
-                <h2>Đơn Hàng Mới Nhất</h2>
-                <div class="table-container">
-                    <table id="recentOrdersTable">
-                        <thead>
-                            <tr>
-                                <th>Mã Đơn</th>
-                                <th>Khách Hàng</th>
-                                <th>Số Điện Thoại</th>
-                                <th>Tổng Tiền</th>
-                                <th>Trạng Thái</th>
-                                <th>Ngày Tạo</th>
-                                <th>Thao Tác</th>
-                            </tr>
-                        </thead>
-                        <tbody id="recentOrdersBody">
-                        </tbody>
-                    </table>
+                <h2><i class="fas fa-shopping-bag"></i> Đơn Hàng Mới Nhất</h2>
+                <div id="recentOrdersContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <!-- Recent orders cards will be generated here -->
                 </div>
             </div>
         </div>
@@ -945,23 +1104,8 @@
                 <div class="search-box">
                     <input type="text" id="productSearch" placeholder="Tìm kiếm sản phẩm..." onkeyup="searchProducts()">
                 </div>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Ảnh</th>
-                                <th>Tên Sản Phẩm</th>
-                                <th>Giá Vốn</th>
-                                <th>Giá Thuê</th>
-                                <th>Tồn Kho</th>
-                                <th>Đang Thuê</th>
-                                <th>Thao Tác</th>
-                            </tr>
-                        </thead>
-                        <tbody id="productsTableBody">
-                        </tbody>
-                    </table>
+                <div id="productsContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px; margin-top: 20px;">
+                    <!-- Product cards will be generated here -->
                 </div>
             </div>
         </div>
@@ -970,6 +1114,9 @@
         <div id="orders" class="section hidden">
             <div class="page-header">
                 <h1><i class="fas fa-shopping-cart"></i> Quản Lý Đơn Hàng</h1>
+                <button class="btn btn-secondary" onclick="migrateOldOrderIds()" style="background: #6c757d;">
+                    <i class="fas fa-sync"></i> Đổi Mã Đơn Hàng Cũ
+                </button>
             </div>
 
             <div class="content-card">
@@ -983,23 +1130,8 @@
                 <div class="search-box">
                     <input type="text" id="orderSearch" placeholder="Tìm kiếm đơn hàng..." onkeyup="searchOrders()">
                 </div>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Mã Đơn</th>
-                                <th>Khách Hàng</th>
-                                <th>SĐT</th>
-                                <th>Sản Phẩm</th>
-                                <th>Tổng Tiền</th>
-                                <th>Trạng Thái</th>
-                                <th>Ngày Tạo</th>
-                                <th>Thao Tác</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ordersTableBody">
-                        </tbody>
-                    </table>
+                <div id="ordersContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <!-- Order cards will be generated here -->
                 </div>
             </div>
         </div>
@@ -1038,56 +1170,121 @@
                 <h1><i class="fas fa-chart-bar"></i> Thống Kê</h1>
             </div>
 
-            <div class="content-card">
-                <h2>Thống Kê Doanh Thu</h2>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon blue">
+            <div class="content-card" id="revenueStatsSection">
+                <h2><i class="fas fa-chart-line"></i> Thống Kê Doanh Thu</h2>
+                <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+                    <div class="stat-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; cursor: pointer;" onclick="showRevenueChart('today')">
+                        <div class="stat-icon" style="background: rgba(255,255,255,0.2);">
                             <i class="fas fa-calendar-day"></i>
                         </div>
                         <div class="stat-info">
-                            <h3 id="todayRevenue">0 đ</h3>
-                            <p>Doanh Thu Hôm Nay</p>
+                            <h3 id="todayRevenue" style="color: white; -webkit-text-fill-color: white;">0 đ</h3>
+                            <p style="color: rgba(255,255,255,0.9);">Hôm Nay</p>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon green">
+                    <div class="stat-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; cursor: pointer;" onclick="showRevenueChart('week')">
+                        <div class="stat-icon" style="background: rgba(255,255,255,0.2);">
                             <i class="fas fa-calendar-week"></i>
                         </div>
                         <div class="stat-info">
-                            <h3 id="weekRevenue">0 đ</h3>
-                            <p>Doanh Thu Tuần Này</p>
+                            <h3 id="weekRevenue" style="color: white; -webkit-text-fill-color: white;">0 đ</h3>
+                            <p style="color: rgba(255,255,255,0.9);">Tuần Này</p>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon orange">
+                    <div class="stat-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; cursor: pointer;" onclick="showRevenueChart('month')">
+                        <div class="stat-icon" style="background: rgba(255,255,255,0.2);">
                             <i class="fas fa-calendar-alt"></i>
                         </div>
                         <div class="stat-info">
-                            <h3 id="monthRevenue">0 đ</h3>
-                            <p>Doanh Thu Tháng Này</p>
+                            <h3 id="monthRevenue" style="color: white; -webkit-text-fill-color: white;">0 đ</h3>
+                            <p style="color: rgba(255,255,255,0.9);">Tháng Này</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; cursor: pointer;" onclick="showRevenueChart('quarter')">
+                        <div class="stat-icon" style="background: rgba(255,255,255,0.2);">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="quarterRevenue" style="color: white; -webkit-text-fill-color: white;">0 đ</h3>
+                            <p style="color: rgba(255,255,255,0.9);">Quý Này</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; cursor: pointer;" onclick="showRevenueChart('year')">
+                        <div class="stat-icon" style="background: rgba(255,255,255,0.2);">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="yearRevenue" style="color: white; -webkit-text-fill-color: white;">0 đ</h3>
+                            <p style="color: rgba(255,255,255,0.9);">Năm Này</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="content-card">
-                <h2>Sản Phẩm Bán Chạy</h2>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Tên Sản Phẩm</th>
-                                <th>Số Lượt Thuê</th>
-                                <th>Doanh Thu</th>
-                            </tr>
-                        </thead>
-                        <tbody id="topProductsBody">
-                        </tbody>
-                    </table>
+                <h2><i class="fas fa-cubes"></i> Thống Kê Theo Model</h2>
+                <div id="modelStatsContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 15px; margin-top: 20px; width: 100%; box-sizing: border-box;">
+                    <!-- Model stats cards will be generated here -->
                 </div>
             </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-star"></i> Sản Phẩm Bán Chạy</h2>
+                <div id="topProductsContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px; margin-top: 20px;">
+                    <!-- Top products cards will be generated here -->
+                </div>
+            </div>
+
+            <div class="content-card" id="revenueChartCard" style="display: none;">
+                <h2><i class="fas fa-chart-bar"></i> Biểu Đồ Doanh Thu</h2>
+                
+                <!-- Chart Type Selector -->
+                <div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="chart-type-btn active" data-type="today" onclick="selectChartType('today')">
+                        <i class="fas fa-calendar-day"></i> Hôm Nay
+                    </button>
+                    <button class="chart-type-btn" data-type="week" onclick="selectChartType('week')">
+                        <i class="fas fa-calendar-week"></i> Tuần Này
+                    </button>
+                    <button class="chart-type-btn" data-type="month" onclick="selectChartType('month')">
+                        <i class="fas fa-calendar-alt"></i> Tháng Này
+                    </button>
+                    <button class="chart-type-btn" data-type="quarter" onclick="selectChartType('quarter')">
+                        <i class="fas fa-calendar"></i> Quý Này
+                    </button>
+                    <button class="chart-type-btn" data-type="year" onclick="selectChartType('year')">
+                        <i class="fas fa-calendar-check"></i> Năm Này
+                    </button>
+                </div>
+
+                <div style="padding: 30px; background: white; border-radius: 15px; border: 1px solid #e0e0e0; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                    <div style="display: flex; gap: 20px; height: 450px;">
+                        <!-- Y-Axis -->
+                        <div id="yAxis" style="display: flex; flex-direction: column; justify-content: space-between; padding-right: 15px; border-right: 2px solid #e0e0e0; min-width: 80px;">
+                            <!-- Y-axis labels will be generated here -->
+                        </div>
+                        
+                        <!-- Chart Area -->
+                        <div style="flex: 1; position: relative;">
+                            <!-- Grid Lines -->
+                            <div id="chartGrid" style="position: absolute; top: 0; left: 0; right: 0; bottom: 60px; pointer-events: none;">
+                                <!-- Grid lines will be generated here -->
+                            </div>
+                            
+                            <!-- SVG Chart -->
+                            <svg id="revenueChart" style="width: 100%; height: 100%; position: relative;" viewBox="0 0 800 390" preserveAspectRatio="none">
+                                <!-- Chart will be drawn here -->
+                            </svg>
+                            
+                            <!-- X-Axis Labels -->
+                            <div id="chartLabels" style="position: absolute; bottom: 0; left: 0; right: 0; display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #495057; padding-top: 10px;">
+                                <!-- Labels will be generated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -1200,6 +1397,19 @@
                 <button class="close-modal" onclick="closeOrderModal()">&times;</button>
             </div>
             <div id="orderDetailContent">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Model Detail Modal -->
+    <div id="modelDetailModal" class="modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h3 id="modelDetailTitle">Chi Tiết Model</h3>
+                <button class="close-modal" onclick="closeModelDetailModal()">&times;</button>
+            </div>
+            <div id="modelDetailContent">
                 <!-- Content will be loaded here -->
             </div>
         </div>
@@ -1461,11 +1671,67 @@
 
         // Format số tiền
         const formatMoney = (n) => n.toLocaleString('vi-VN') + ' đ';
+        const formatCompact = (n) => {
+            if (Math.abs(n) >= 1000000) return (n / 1000000).toFixed(1).replace('.0','') + "tr";
+            return (n / 1000).toFixed(0) + "k";
+        };
         const formatDate = (timestamp) => {
             if (!timestamp) return 'N/A';
             const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
             return date.toLocaleString('vi-VN');
         };
+
+        // Navigation functions for dashboard cards
+        function navigateToProducts() {
+            showSection('products');
+            // Update sidebar active state
+            document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+            const productsLink = document.querySelector('.sidebar-menu a[onclick*="products"]');
+            if (productsLink) productsLink.classList.add('active');
+        }
+
+        function navigateToOrders() {
+            showSection('orders');
+            // Update sidebar active state
+            document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+            const ordersLink = document.querySelector('.sidebar-menu a[onclick*="orders"]');
+            if (ordersLink) ordersLink.classList.add('active');
+        }
+
+        function navigateToRevenue() {
+            showSection('statistics');
+            // Update sidebar active state
+            document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+            const statsLink = document.querySelector('.sidebar-menu a[onclick*="statistics"]');
+            if (statsLink) statsLink.classList.add('active');
+            
+            // Scroll to revenue section after a short delay
+            setTimeout(() => {
+                const revenueSection = document.getElementById('revenueStatsSection');
+                if (revenueSection) {
+                    revenueSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 100);
+        }
+
+        function navigateToPendingOrders() {
+            showSection('orders');
+            // Update sidebar active state
+            document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+            const ordersLink = document.querySelector('.sidebar-menu a[onclick*="orders"]');
+            if (ordersLink) ordersLink.classList.add('active');
+            
+            // Filter to pending orders after a short delay
+            setTimeout(() => {
+                const pendingTab = document.querySelector('.tab[onclick*="pending"]');
+                if (pendingTab) {
+                    pendingTab.click();
+                } else {
+                    // Fallback: manually trigger filter
+                    filterOrders('pending');
+                }
+            }, 100);
+        }
 
         // Navigation
         function showSection(sectionId, evt) {
@@ -1478,6 +1744,9 @@
                 if (link) link.classList.add('active');
             }
             
+            // Lưu tab đang chọn vào localStorage
+            localStorage.setItem('adminActiveTab', sectionId);
+            
             if (sectionId === 'dashboard') loadDashboard();
             if (sectionId === 'products') loadProducts();
             if (sectionId === 'orders') loadOrders();
@@ -1489,6 +1758,33 @@
                 toggleSidebar();
             }
         }
+        
+        // Restore active tab on load
+        function restoreActiveTab() {
+            const savedTab = localStorage.getItem('adminActiveTab') || 'dashboard';
+            const section = document.getElementById(savedTab);
+            if (section) {
+                document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+                document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+                section.classList.remove('hidden');
+                
+                // Set active menu item
+                const menuItems = document.querySelectorAll('.sidebar-menu a');
+                menuItems.forEach(item => {
+                    const href = item.getAttribute('onclick');
+                    if (href && href.includes(`'${savedTab}'`)) {
+                        item.classList.add('active');
+                    }
+                });
+                
+                // Load data for the section
+                if (savedTab === 'dashboard') loadDashboard();
+                if (savedTab === 'products') loadProducts();
+                if (savedTab === 'orders') loadOrders();
+                if (savedTab === 'statistics') loadStatistics();
+                if (savedTab === 'trash') loadTrash();
+            }
+        }
 
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
@@ -1496,18 +1792,45 @@
             const toggle = document.getElementById('menuToggle');
             
             if (sidebar && overlay && toggle) {
+                const isActive = sidebar.classList.contains('active');
                 sidebar.classList.toggle('active');
                 overlay.classList.toggle('active');
                 
                 // Đổi icon
                 const icon = toggle.querySelector('i');
-                if (sidebar.classList.contains('active')) {
+                if (!isActive) {
                     icon.className = 'fas fa-times';
                 } else {
                     icon.className = 'fas fa-bars';
                 }
             }
         }
+        
+        // Fix mobile menu - allow clicking menu items
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuOverlay = document.getElementById('menuOverlay');
+            if (menuOverlay) {
+                menuOverlay.addEventListener('click', function(e) {
+                    // Only close if clicking the overlay itself, not menu items
+                    if (e.target === menuOverlay) {
+                        toggleSidebar();
+                    }
+                });
+            }
+            
+            // Ensure menu items are clickable on mobile
+            const menuItems = document.querySelectorAll('.sidebar-menu a');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // Let the onclick handler run first, then close menu
+                    setTimeout(() => {
+                        if (window.innerWidth <= 768) {
+                            toggleSidebar();
+                        }
+                    }, 100);
+                });
+            });
+        });
 
         // ========== DASHBOARD ==========
         function loadDashboard() {
@@ -1536,60 +1859,279 @@
 
             // Load recent orders
             dbInstance.collection('orders').orderBy('createdAt', 'desc').limit(10).get().then(snapshot => {
-                const tbody = document.getElementById('recentOrdersBody');
-                tbody.innerHTML = '';
+                const container = document.getElementById('recentOrdersContainer');
+                container.innerHTML = '';
                 if (snapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 40px;">Chưa có đơn hàng nào</td></tr>';
+                    container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999;">Chưa có đơn hàng nào</div>';
                 } else {
                     snapshot.forEach(doc => {
                         const order = doc.data();
-                        const row = createOrderRow(doc.id, order);
-                        tbody.appendChild(row);
+                        const card = createOrderCard(doc.id, order);
+                        container.appendChild(card);
                     });
                 }
             }).catch(error => {
                 console.error('Lỗi tải đơn hàng gần đây:', error);
+                });
+        }
+
+        // Copy order ID
+        function copyOrderId(orderId) {
+            navigator.clipboard.writeText(orderId).then(() => {
+                // Show temporary success message
+                const btn = event.target.closest('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Đã Copy';
+                btn.style.background = '#28a745';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '#c62828';
+                }, 2000);
+            }).catch(err => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = orderId;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const btn = event.target.closest('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Đã Copy';
+                btn.style.background = '#28a745';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '#c62828';
+                }, 2000);
+            });
+        }
+
+        // Migrate old order IDs to new format
+        function migrateOldOrderIds() {
+            if (!confirm('Bạn có chắc muốn thêm mã đơn hàng mới (TPNV_XXXXXX) cho các đơn hàng cũ? Đơn hàng cũ sẽ giữ nguyên document ID, chỉ thêm trường orderIdNew.')) {
+                return;
+            }
+            
+            const dbInstance = ensureDb();
+            let migratedCount = 0;
+            let skippedCount = 0;
+            let errorCount = 0;
+            const errors = [];
+            
+            // Show loading
+            const loadingMsg = document.createElement('div');
+            loadingMsg.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 10000; text-align: center;';
+            loadingMsg.innerHTML = '<div style="font-size: 18px; font-weight: 700; margin-bottom: 15px;">Đang xử lý...</div><div id="migrateProgress">Đang tải danh sách đơn hàng...</div>';
+            document.body.appendChild(loadingMsg);
+            
+            dbInstance.collection('orders').get().then(snapshot => {
+                const ordersToMigrate = [];
+                snapshot.forEach(doc => {
+                    const orderData = doc.data();
+                    // Chỉ migrate nếu chưa có orderIdNew
+                    if (!orderData.orderIdNew) {
+                        ordersToMigrate.push({ docId: doc.id, data: orderData });
+                    } else {
+                        skippedCount++;
+                    }
+                });
+                
+                if (ordersToMigrate.length === 0) {
+                    loadingMsg.remove();
+                    alert(`Không có đơn hàng nào cần migrate!${skippedCount > 0 ? `\nĐã bỏ qua ${skippedCount} đơn hàng đã có orderIdNew.` : ''}`);
+                    return;
+                }
+                
+                document.getElementById('migrateProgress').textContent = `Tìm thấy ${ordersToMigrate.length} đơn hàng cần migrate. Đang xử lý...`;
+                
+                // Process in batches of 10
+                const batchSize = 10;
+                let currentIndex = 0;
+                const usedIds = new Set();
+                
+                function processBatch() {
+                    const batch = dbInstance.batch();
+                    const currentBatch = ordersToMigrate.slice(currentIndex, currentIndex + batchSize);
+                    
+                    if (currentBatch.length === 0) {
+                        loadingMsg.remove();
+                        alert(`Đã migrate thành công ${migratedCount} đơn hàng!${skippedCount > 0 ? `\nĐã bỏ qua ${skippedCount} đơn hàng đã có orderIdNew.` : ''}${errors.length > 0 ? `\nLỗi: ${errors.length}` : ''}`);
+                        loadOrders();
+                        if (!document.getElementById('dashboard').classList.contains('hidden')) {
+                            loadDashboard();
+                        }
+                        return;
+                    }
+                    
+                    currentBatch.forEach(({ docId, data }) => {
+                        // Generate new ID
+                        let newId;
+                        let attempts = 0;
+                        do {
+                            const randomId = Math.floor(100000 + Math.random() * 900000);
+                            newId = `TPNV_${randomId}`;
+                            attempts++;
+                            if (attempts > 20) {
+                                throw new Error(`Không thể tạo mã mới cho ${docId} sau nhiều lần thử`);
+                            }
+                        } while (usedIds.has(newId));
+                        
+                        usedIds.add(newId);
+                        
+                        // Update document với orderIdNew (không đổi document ID)
+                        const docRef = dbInstance.collection('orders').doc(docId);
+                        batch.update(docRef, { orderIdNew: newId });
+                    });
+                    
+                    batch.commit().then(() => {
+                        migratedCount += currentBatch.length;
+                        currentIndex += batchSize;
+                        document.getElementById('migrateProgress').textContent = `Đã xử lý ${migratedCount}/${ordersToMigrate.length} đơn hàng...`;
+                        processBatch();
+                    }).catch(error => {
+                        console.error('Lỗi commit batch:', error);
+                        errorCount += currentBatch.length;
+                        errors.push({ batch: currentIndex, error: error.message });
+                        currentIndex += batchSize;
+                        processBatch();
+                    });
+                }
+                
+                processBatch();
+            }).catch(error => {
+                console.error('Lỗi load orders:', error);
+                loadingMsg.remove();
+                alert('Có lỗi xảy ra khi tải danh sách đơn hàng!');
             });
         }
 
         // ========== PRODUCTS ==========
+        function createProductCard(productId, product) {
+            const card = document.createElement('div');
+            card.setAttribute('data-product-id', productId);
+            const totalStock = Object.values(product.sizes || {}).reduce((a, b) => a + b, 0);
+            const availableStock = totalStock - (product.renting || 0);
+            const mainImage = (product.images && Array.isArray(product.images) && product.images.length > 0)
+                ? product.images[0]
+                : (product.image || 'https://via.placeholder.com/300');
+            
+            card.style.cssText = `
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+                border: 1px solid #e0e0e0;
+                transition: all 0.3s;
+                position: relative;
+                overflow: hidden;
+                display: block;
+            `;
+            
+            card.onmouseenter = function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+                this.style.borderColor = '#c62828';
+            };
+            
+            card.onmouseleave = function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 4px 15px rgba(0,0,0,0.08)';
+                this.style.borderColor = '#e0e0e0';
+            };
+            
+            const sizesList = product.sizes ? Object.entries(product.sizes)
+                .filter(([size, qty]) => qty > 0)
+                .map(([size, qty]) => `${size}: ${qty}`)
+                .join(', ') : 'Chưa có size';
+            
+            card.innerHTML = `
+                <div style="position: relative; width: 100%; height: 140px; overflow: hidden; background: #f8f9fa;">
+                    <img src="${mainImage}" 
+                         style="width: 100%; height: 100%; object-fit: cover;" 
+                         onerror="this.src='https://via.placeholder.com/300'">
+                    ${product.images && product.images.length > 1 ? `
+                    <div style="position: absolute; top: 6px; right: 6px; background: rgba(0,0,0,0.6); color: white; padding: 3px 6px; border-radius: 10px; font-size: 10px; font-weight: 600;">
+                        <i class="fas fa-images"></i> ${product.images.length}
+                    </div>
+                    ` : ''}
+                </div>
+                <div style="padding: 12px;">
+                    <div style="margin-bottom: 8px;">
+                        <div style="font-size: 9px; color: #999; margin-bottom: 2px; font-weight: 600;">ID</div>
+                        <div style="font-size: 10px; color: #666; font-weight: 600;">${(product.id || productId).substring(0, 12)}${(product.id || productId).length > 12 ? '...' : ''}</div>
+                    </div>
+                    <h3 style="font-size: 14px; font-weight: 800; color: #333; margin-bottom: 10px; line-height: 1.3; min-height: 36px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                        ${product.name || 'Chưa có tên'}
+                    </h3>
+                    <div style="background: #f8f9fa; padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                            <div>
+                                <div style="font-size: 9px; color: #666; margin-bottom: 2px;">Giá Vốn</div>
+                                <div style="font-size: 13px; font-weight: 800; color: #333;">${formatMoney(product.importPrice || 0)}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 9px; color: #666; margin-bottom: 2px;">Giá Thuê</div>
+                                <div style="font-size: 13px; font-weight: 800; color: #c62828;">${formatMoney(product.rentPrice || 0)}</div>
+                            </div>
+                        </div>
+                        <div style="border-top: 1px solid #e0e0e0; padding-top: 8px; margin-top: 8px;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;">
+                                <div>
+                                    <div style="font-size: 9px; color: #666; margin-bottom: 2px;">Tồn</div>
+                                    <div style="font-size: 14px; font-weight: 800; color: #28a745;">${totalStock}</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 9px; color: #666; margin-bottom: 2px;">Thuê</div>
+                                    <div style="font-size: 14px; font-weight: 800; color: #ffc107;">${product.renting || 0}</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 9px; color: #666; margin-bottom: 2px;">Sẵn</div>
+                                    <div style="font-size: 14px; font-weight: 800; color: ${availableStock > 0 ? '#17a2b8' : '#dc3545'};">
+                                        ${availableStock}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    ${sizesList !== 'Chưa có size' ? `
+                    <div style="background: #fff3e0; padding: 6px 8px; border-radius: 6px; margin-bottom: 10px; border-left: 2px solid #ffc107;">
+                        <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">
+                            <i class="fas fa-ruler"></i> Size
+                        </div>
+                        <div style="font-size: 10px; color: #333; line-height: 1.4;">
+                            ${sizesList}
+                        </div>
+                    </div>
+                    ` : ''}
+                    <div style="display: flex; gap: 6px;">
+                        <button class="btn btn-sm btn-primary" onclick="editProduct('${productId}')" style="flex: 1; padding: 8px; font-size: 12px;">
+                            <i class="fas fa-edit"></i> Sửa
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteProduct('${productId}')" style="flex: 1; padding: 8px; font-size: 12px;">
+                            <i class="fas fa-trash"></i> Xóa
+                        </button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
         function loadProducts() {
             const dbInstance = ensureDb();
             dbInstance.collection('products').get().then(snapshot => {
-                const tbody = document.getElementById('productsTableBody');
-                tbody.innerHTML = '';
+                const container = document.getElementById('productsContainer');
+                container.innerHTML = '';
                 let hasProducts = false;
                 snapshot.forEach(doc => {
                     const product = doc.data();
                     // Bỏ qua sản phẩm đã xóa
                     if (product.deleted === true) return;
                     hasProducts = true;
-                    const totalStock = Object.values(product.sizes || {}).reduce((a, b) => a + b, 0);
-                    const mainImage = (product.images && Array.isArray(product.images) && product.images.length > 0)
-                        ? product.images[0]
-                        : (product.image || '');
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${product.id}</td>
-                        <td><img src="${mainImage}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;" onerror="this.src='https://via.placeholder.com/60'"></td>
-                        <td>${product.name}</td>
-                        <td>${formatMoney(product.importPrice || 0)}</td>
-                        <td>${formatMoney(product.rentPrice || 0)}</td>
-                        <td>${totalStock}</td>
-                        <td>${product.renting || 0}</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary" onclick="editProduct('${doc.id}')">
-                                <i class="fas fa-edit"></i> Sửa
-                            </button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteProduct('${doc.id}')">
-                                <i class="fas fa-trash"></i> Xóa
-                            </button>
-                        </td>
-                    `;
-                    tbody.appendChild(row);
+                    const card = createProductCard(doc.id, product);
+                    container.appendChild(card);
                 });
                 if (!hasProducts) {
-                    tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 40px;">Chưa có sản phẩm nào. Hãy thêm sản phẩm mới!</td></tr>';
+                    container.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 60px; color: #999; font-size: 16px;"><i class="fas fa-box-open" style="font-size: 48px; margin-bottom: 15px; opacity: 0.3;"></i><br>Chưa có sản phẩm nào. Hãy thêm sản phẩm mới!</div>';
                 }
             }).catch(error => {
                 console.error('Lỗi tải sản phẩm:', error);
@@ -1827,10 +2369,10 @@
 
         function searchProducts() {
             const search = document.getElementById('productSearch').value.toLowerCase();
-            const rows = document.querySelectorAll('#productsTableBody tr');
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(search) ? '' : 'none';
+            const cards = document.querySelectorAll('#productsContainer > div[data-product-id]');
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(search) ? '' : 'none';
             });
         }
 
@@ -1841,22 +2383,22 @@
             let query = dbInstance.collection('orders').orderBy('createdAt', 'desc');
             
             query.get().then(snapshot => {
-                const tbody = document.getElementById('ordersTableBody');
-                tbody.innerHTML = '';
+                const container = document.getElementById('ordersContainer');
+                container.innerHTML = '';
                 if (snapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 40px;">Chưa có đơn hàng nào</td></tr>';
+                    container.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 60px; color: #999; font-size: 16px;"><i class="fas fa-inbox" style="font-size: 48px; margin-bottom: 15px; opacity: 0.3;"></i><br>Chưa có đơn hàng nào</div>';
                 } else {
                     let hasOrders = false;
                     snapshot.forEach(doc => {
                         const order = doc.data();
                         if (filterOrderByStatus(order.status)) {
-                            const row = createOrderRow(doc.id, order);
-                            tbody.appendChild(row);
+                            const card = createOrderCard(doc.id, order);
+                            container.appendChild(card);
                             hasOrders = true;
                         }
                     });
                     if (!hasOrders) {
-                        tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 40px;">Không có đơn hàng nào với trạng thái này</td></tr>';
+                        container.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 60px; color: #999; font-size: 16px;"><i class="fas fa-filter" style="font-size: 48px; margin-bottom: 15px; opacity: 0.3;"></i><br>Không có đơn hàng nào với trạng thái này</div>';
                     }
                 }
             }).catch(error => {
@@ -1864,13 +2406,122 @@
             });
         }
 
+        // Helper function to get display order ID (prefer orderIdNew)
+        function getDisplayOrderId(orderId, order) {
+            return order?.orderIdNew || orderId;
+        }
+
+        function createOrderCard(orderId, order) {
+            const displayOrderId = getDisplayOrderId(orderId, order);
+            const card = document.createElement('div');
+            card.setAttribute('data-order-id', orderId);
+            const statusBadge = getStatusBadge(order.status);
+            const statusColors = {
+                'pending': { bg: '#fff3cd', border: '#ffc107', text: '#856404' },
+                'confirmed': { bg: '#d1ecf1', border: '#17a2b8', text: '#0c5460' },
+                'completed': { bg: '#d4edda', border: '#28a745', text: '#155724' },
+                'cancelled': { bg: '#f8d7da', border: '#dc3545', text: '#721c24' }
+            };
+            const statusInfo = statusColors[order.status] || statusColors.pending;
+            const itemsCount = order.items ? order.items.reduce((sum, item) => sum + item.quantity, 0) : 0;
+            const itemsList = order.items ? order.items.slice(0, 2).map(i => `${i.name} (x${i.quantity})`).join(', ') : '';
+            const hasMoreItems = order.items && order.items.length > 2;
+            
+            card.style.cssText = `
+                background: white;
+                padding: 20px;
+                border-radius: 15px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+                border: 2px solid ${statusInfo.border};
+                transition: all 0.3s;
+                position: relative;
+                overflow: hidden;
+            `;
+            card.onmouseenter = function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+            };
+            card.onmouseleave = function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 4px 15px rgba(0,0,0,0.08)';
+            };
+            
+            card.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 2px solid #f0f0f0;">
+                    <div style="flex: 1;">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+                            <div style="font-size: 12px; color: #666; font-weight: 600;">Mã Đơn</div>
+                            <button onclick="copyOrderId('${displayOrderId}')" style="background: #c62828; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 11px; display: flex; align-items: center; gap: 4px;" title="Copy mã đơn">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div style="font-size: 16px; font-weight: 800; color: #333; word-break: break-all;">${displayOrderId}</div>
+                    </div>
+                    <div style="text-align: right;">
+                        ${statusBadge}
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <div style="font-size: 13px; color: #666; margin-bottom: 5px; font-weight: 600;">
+                        <i class="fas fa-user"></i> Khách Hàng
+                    </div>
+                    <div style="font-size: 16px; font-weight: 700; color: #333; margin-bottom: 8px;">${order.customerName || 'N/A'}</div>
+                    <div style="font-size: 13px; color: #666;">
+                        <i class="fas fa-phone"></i> ${order.customerPhone || 'N/A'}
+                    </div>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 12px; border-radius: 10px; margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <div>
+                            <div style="font-size: 11px; color: #666; margin-bottom: 3px;">Số Lượng SP</div>
+                            <div style="font-size: 18px; font-weight: 800; color: #333;">${itemsCount}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 11px; color: #666; margin-bottom: 3px;">Tổng Tiền</div>
+                            <div style="font-size: 20px; font-weight: 800; color: #c62828;">${formatMoney(order.total || 0)}</div>
+                        </div>
+                    </div>
+                    ${order.items && order.items.length > 0 ? `
+                    <div style="border-top: 1px solid #e0e0e0; padding-top: 10px; margin-top: 10px;">
+                        <div style="font-size: 11px; color: #666; margin-bottom: 5px; font-weight: 600;">
+                            <i class="fas fa-box"></i> Sản Phẩm:
+                        </div>
+                        <div style="font-size: 12px; color: #333; line-height: 1.5;">
+                            ${itemsList}${hasMoreItems ? ` <span style="color: #c62828; font-weight: 600;">+${order.items.length - 2} sản phẩm khác</span>` : ''}
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+                
+                <div style="font-size: 12px; color: #999; margin-bottom: 15px;">
+                    <i class="fas fa-calendar"></i> ${formatDate(order.createdAt)}
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-sm btn-success" onclick="viewOrder('${orderId}')" style="flex: 1;">
+                        <i class="fas fa-eye"></i> Xem
+                    </button>
+                    <select onchange="updateOrderStatus('${orderId}', this.value)" style="flex: 1; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 12px; background: white; cursor: pointer;">
+                        <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Chờ Xử Lý</option>
+                        <option value="confirmed" ${order.status === 'confirmed' ? 'selected' : ''}>Đã Xác Nhận</option>
+                        <option value="completed" ${order.status === 'completed' ? 'selected' : ''}>Hoàn Thành</option>
+                        <option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>Đã Hủy</option>
+                    </select>
+                </div>
+            `;
+            return card;
+        }
+
         function createOrderRow(orderId, order) {
             const row = document.createElement('tr');
             const statusBadge = getStatusBadge(order.status);
             const itemsText = order.items ? order.items.map(i => `${i.name} (x${i.quantity})`).join(', ') : '';
+            const displayOrderId = getDisplayOrderId(orderId, order);
             
             row.innerHTML = `
-                <td>${orderId.substring(0, 8)}...</td>
+                <td>${displayOrderId.length > 12 ? displayOrderId.substring(0, 12) + '...' : displayOrderId}</td>
                 <td>${order.customerName || 'N/A'}</td>
                 <td>${order.customerPhone || 'N/A'}</td>
                 <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;">${itemsText}</td>
@@ -1937,44 +2588,135 @@
                 if (doc.exists) {
                     const order = doc.data();
                     const content = document.getElementById('orderDetailContent');
+                    const statusText = {
+                        'pending': 'Chờ Xử Lý',
+                        'confirmed': 'Đã Xác Nhận',
+                        'completed': 'Hoàn Thành',
+                        'cancelled': 'Đã Hủy'
+                    };
+                    const statusColors = {
+                        'pending': { bg: '#fff3cd', text: '#856404' },
+                        'confirmed': { bg: '#d1ecf1', text: '#0c5460' },
+                        'completed': { bg: '#d4edda', text: '#155724' },
+                        'cancelled': { bg: '#f8d7da', text: '#721c24' }
+                    };
+                    const statusInfo = statusColors[order.status] || statusColors.pending;
+                    
+                    const displayOrderId = order.orderIdNew || orderId;
                     content.innerHTML = `
-                        <div style="margin-bottom: 20px;">
-                            <h4>Thông Tin Khách Hàng</h4>
-                            <p><strong>Tên:</strong> ${order.customerName}</p>
-                            <p><strong>SĐT:</strong> ${order.customerPhone}</p>
-                            <p><strong>Địa chỉ:</strong> ${order.customerAddress}</p>
+                        <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #c62828;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                                <div style="flex: 1;">
+                                    <div style="font-size: 11px; color: #666; margin-bottom: 4px; font-weight: 600;">Mã Đơn Hàng</div>
+                                    <div style="font-size: 16px; font-weight: 800; color: #333; word-break: break-all; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                        ${displayOrderId}
+                                        <button onclick="copyOrderId('${displayOrderId}')" style="background: #c62828; color: white; border: none; padding: 4px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; display: flex; align-items: center; gap: 4px;">
+                                            <i class="fas fa-copy"></i> Copy
+                                        </button>
+                                    </div>
+                                </div>
+                                <div style="padding: 6px 12px; background: ${statusInfo.bg}; color: ${statusInfo.text}; border-radius: 18px; font-weight: 700; font-size: 12px; white-space: nowrap;">
+                                    ${statusText[order.status] || 'Chờ Xử Lý'}
+                                </div>
+                            </div>
+                            <div style="font-size: 11px; color: #999;">
+                                <i class="fas fa-calendar"></i> ${formatDate(order.createdAt)}
+                            </div>
                         </div>
-                        <div style="margin-bottom: 20px;">
-                            <h4>Sản Phẩm</h4>
-                            <table style="width: 100%; margin-top: 10px;">
-                                <thead>
-                                    <tr>
-                                        <th>Tên</th>
-                                        <th>Số Lượng</th>
-                                        <th>Đơn Giá</th>
-                                        <th>Thành Tiền</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${order.items ? order.items.map(item => `
-                                        <tr>
-                                            <td>${item.name}</td>
-                                            <td>${item.quantity}</td>
-                                            <td>${formatMoney(item.price)}</td>
-                                            <td>${formatMoney(item.price * item.quantity)}</td>
+
+                        <div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #e0e0e0;">
+                            <h4 style="color: #c62828; margin-bottom: 12px; font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 8px; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0;">
+                                <i class="fas fa-user-circle"></i> Thông Tin Khách Hàng
+                            </h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                                <div style="background: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 3px solid #c62828;">
+                                    <div style="font-size: 10px; color: #666; margin-bottom: 5px; font-weight: 600;">
+                                        <i class="fas fa-user"></i> Tên
+                                    </div>
+                                    <div style="font-size: 14px; font-weight: 700; color: #333;">${order.customerName || 'N/A'}</div>
+                                </div>
+                                <div style="background: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 3px solid #17a2b8;">
+                                    <div style="font-size: 10px; color: #666; margin-bottom: 5px; font-weight: 600;">
+                                        <i class="fas fa-phone"></i> SĐT
+                                    </div>
+                                    <div style="font-size: 14px; font-weight: 700; color: #333;">${order.customerPhone || 'N/A'}</div>
+                                </div>
+                                <div style="background: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 3px solid #28a745; grid-column: 1 / -1;">
+                                    <div style="font-size: 10px; color: #666; margin-bottom: 5px; font-weight: 600;">
+                                        <i class="fas fa-map-marker-alt"></i> Địa Chỉ
+                                    </div>
+                                    <div style="font-size: 13px; color: #333; line-height: 1.5;">${order.customerAddress || 'N/A'}</div>
+                                </div>
+                                ${order.rentalDate ? `
+                                <div style="background: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 3px solid #ffc107;">
+                                    <div style="font-size: 10px; color: #666; margin-bottom: 5px; font-weight: 600;">
+                                        <i class="fas fa-calendar-check"></i> Ngày Thuê
+                                    </div>
+                                    <div style="font-size: 13px; font-weight: 700; color: #333;">${order.rentalDate}</div>
+                                </div>
+                                ` : ''}
+                                ${order.returnDate ? `
+                                <div style="background: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 3px solid #17a2b8;">
+                                    <div style="font-size: 10px; color: #666; margin-bottom: 5px; font-weight: 600;">
+                                        <i class="fas fa-calendar-times"></i> Ngày Trả
+                                    </div>
+                                    <div style="font-size: 13px; font-weight: 700; color: #333;">${order.returnDate}</div>
+                                </div>
+                                ` : ''}
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #e0e0e0;">
+                            <h4 style="color: #c62828; margin-bottom: 12px; font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 8px; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0;">
+                                <i class="fas fa-shopping-bag"></i> Sản Phẩm
+                            </h4>
+                            <div style="overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+                                    <thead>
+                                        <tr style="background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%); color: white;">
+                                            <th style="padding: 10px; text-align: left; font-weight: 700; font-size: 11px;">Tên SP</th>
+                                            <th style="padding: 10px; text-align: center; font-weight: 700; font-size: 11px;">SL</th>
+                                            <th style="padding: 10px; text-align: right; font-weight: 700; font-size: 11px;">Đơn Giá</th>
+                                            <th style="padding: 10px; text-align: right; font-weight: 700; font-size: 11px;">Thành Tiền</th>
                                         </tr>
-                                    `).join('') : ''}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        ${order.items ? order.items.map((item, index) => `
+                                            <tr style="border-bottom: 1px solid #e0e0e0; ${index % 2 === 0 ? 'background: #f8f9fa;' : 'background: white;'}">
+                                                <td style="padding: 10px; font-weight: 600; color: #333; font-size: 12px;">${item.name || 'N/A'}</td>
+                                                <td style="padding: 10px; text-align: center; color: #666; font-size: 12px; font-weight: 600;">${item.quantity || 0}</td>
+                                                <td style="padding: 10px; text-align: right; color: #666; font-size: 12px;">${formatMoney(item.price || 0)}</td>
+                                                <td style="padding: 10px; text-align: right; font-weight: 700; color: #c62828; font-size: 13px;">${formatMoney((item.price || 0) * (item.quantity || 0))}</td>
+                                            </tr>
+                                        `).join('') : '<tr><td colspan="4" style="text-align: center; padding: 20px; color: #999; font-size: 13px;">Không có sản phẩm</td></tr>'}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #f0f0f0;">
-                            <p><strong>Tổng Tiền:</strong> ${formatMoney(order.total || 0)}</p>
-                            <p><strong>Trạng Thái:</strong> ${getStatusBadge(order.status)}</p>
-                            <p><strong>Ngày Tạo:</strong> ${formatDate(order.createdAt)}</p>
+
+                        <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 2px solid #ffcc80;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                                <div style="font-size: 16px; font-weight: 700; color: #333; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-money-bill-wave"></i> Tổng Tiền:
+                                </div>
+                                <div style="font-size: 24px; font-weight: 900; color: #c62828;">${formatMoney(order.total || 0)}</div>
+                            </div>
+                            ${order.notes ? `
+                            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.1);">
+                                <div style="font-size: 11px; color: #666; margin-bottom: 6px; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+                                    <i class="fas fa-sticky-note"></i> Ghi Chú:
+                                </div>
+                                <div style="font-size: 12px; color: #333; line-height: 1.5; background: white; padding: 10px; border-radius: 6px; border-left: 3px solid #c62828;">${order.notes}</div>
+                            </div>
+                            ` : ''}
                         </div>
-                        <div style="margin-top: 20px; display: flex; gap: 10px;">
-                            <button class="btn btn-primary" onclick="printInvoice('${orderId}')" style="flex: 1;">
+
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn btn-primary" onclick="printInvoice('${orderId}')" style="flex: 1; padding: 10px; font-size: 13px; font-weight: 600;">
                                 <i class="fas fa-print"></i> In Hóa Đơn
+                            </button>
+                            <button class="btn btn-secondary" onclick="closeOrderModal()" style="flex: 1; padding: 10px; font-size: 13px; font-weight: 600;">
+                                <i class="fas fa-times"></i> Đóng
                             </button>
                         </div>
                     `;
@@ -1990,6 +2732,153 @@
             document.getElementById('orderModal').classList.remove('active');
         }
 
+        function showModelDetails(model) {
+            const modal = document.getElementById('modelDetailModal');
+            const content = document.getElementById('modelDetailContent');
+            const title = document.getElementById('modelDetailTitle');
+            
+            title.textContent = `Chi Tiết Model: ${model.model}`;
+            
+            const avgImportPrice = model.totalQuantity > 0 ? Math.round(model.totalImportCost / model.totalQuantity) : 0;
+            const avgRentPrice = model.totalRentals > 0 ? Math.round(model.totalRevenue / model.totalRentals) : 0;
+            const profit = model.totalRevenue - model.totalImportCost;
+            const profitPercent = model.totalImportCost > 0 ? Math.round((profit / model.totalImportCost) * 100) : 0;
+            const isProfit = profit >= 0;
+            
+            let productsHtml = '';
+            model.products.forEach((product, index) => {
+                const totalStock = Object.values(product.sizes || {}).reduce((a, b) => a + b, 0);
+                const availableStock = totalStock - (product.renting || 0);
+                const productImportCost = (product.importPrice || 0) * totalStock;
+                const productRevenue = (product.rentPrice || 0) * (product.rentalCount || 0);
+                const productProfit = productRevenue - productImportCost;
+                const productProfitPercent = productImportCost > 0 ? Math.round((productProfit / productImportCost) * 100) : 0;
+                const productIsProfit = productProfit >= 0;
+                
+                const mainImage = (product.images && Array.isArray(product.images) && product.images.length > 0)
+                    ? product.images[0]
+                    : (product.image || 'https://via.placeholder.com/100');
+                
+                productsHtml += `
+                    <div style="background: white; border: 1px solid #e0e0e0; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: all 0.3s;" onmouseenter="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseleave="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.05)'">
+                        <div style="width: 100%; height: 120px; overflow: hidden; background: #f8f9fa; border-radius: 8px; margin-bottom: 10px;">
+                            <img src="${mainImage}" 
+                                 style="width: 100%; height: 100%; object-fit: cover;" 
+                                 onerror="this.src='https://via.placeholder.com/280'">
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <div style="font-size: 14px; font-weight: 800; color: #333; margin-bottom: 4px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                ${product.name || 'N/A'}
+                            </div>
+                            <div style="font-size: 10px; color: #999; margin-bottom: 8px;">ID: ${product.id || 'N/A'}</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 10px;">
+                            <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
+                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Giá Vốn</div>
+                                <div style="font-size: 12px; font-weight: 800; color: #333;">${formatMoney(product.importPrice || 0)}</div>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
+                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Giá Thuê</div>
+                                <div style="font-size: 12px; font-weight: 800; color: #c62828;">${formatMoney(product.rentPrice || 0)}</div>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
+                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Tồn</div>
+                                <div style="font-size: 12px; font-weight: 800; color: #28a745;">${totalStock}</div>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
+                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Thuê</div>
+                                <div style="font-size: 12px; font-weight: 800; color: #ffc107;">${product.renting || 0}</div>
+                            </div>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                            <div style="font-size: 9px; color: #666; margin-bottom: 4px; font-weight: 600;">Vốn Nhập</div>
+                            <div style="font-size: 14px; font-weight: 800; color: #495057;">${formatMoney(productImportCost)}</div>
+                        </div>
+                        <div style="background: linear-gradient(135deg, ${productIsProfit ? '#d4edda' : '#f8d7da'} 0%, ${productIsProfit ? '#c3e6cb' : '#f5c6cb'} 100%); padding: 10px; border-radius: 8px; margin-bottom: 10px; border: 1px solid ${productIsProfit ? '#c3e6cb' : '#f5c6cb'};">
+                            <div style="font-size: 9px; color: #666; margin-bottom: 4px; font-weight: 600;">Doanh Thu</div>
+                            <div style="font-size: 14px; font-weight: 800; color: ${productIsProfit ? '#155724' : '#721c24'};">
+                                ${formatMoney(productRevenue)}
+                            </div>
+                        </div>
+                        <div style="background: ${productIsProfit ? '#d4edda' : '#f8d7da'}; padding: 8px; border-radius: 6px; border-left: 3px solid ${productIsProfit ? '#28a745' : '#dc3545'};">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="font-size: 10px; color: #666; font-weight: 600;">Lãi/Lỗ:</div>
+                                <div style="font-size: 14px; font-weight: 800; color: ${productIsProfit ? '#28a745' : '#dc3545'};">
+                                    ${productIsProfit ? '+' : ''}${formatMoney(productProfit)}
+                                </div>
+                            </div>
+                            <div style="text-align: right; font-size: 10px; color: ${productIsProfit ? '#28a745' : '#dc3545'}; font-weight: 600; margin-top: 2px;">
+                                (${productIsProfit ? '+' : ''}${productProfitPercent}%)
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            content.innerHTML = `
+                <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid ${isProfit ? '#28a745' : '#dc3545'};">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <div style="font-size: 11px; color: #666; margin-bottom: 5px; font-weight: 600;">Tổng Số Lượng</div>
+                            <div style="font-size: 20px; font-weight: 800; color: #333;">${model.totalQuantity}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 11px; color: #666; margin-bottom: 5px; font-weight: 600;">Tổng Lượt Thuê</div>
+                            <div style="font-size: 20px; font-weight: 800; color: #333;">${model.totalRentals}</div>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <div style="font-size: 11px; color: #666; margin-bottom: 5px; font-weight: 600;">Tổng Vốn Nhập</div>
+                            <div style="font-size: 18px; font-weight: 800; color: #495057;">${formatMoney(model.totalImportCost)}</div>
+                            <div style="font-size: 10px; color: #999; margin-top: 3px;">${formatMoney(avgImportPrice)}/SP</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 11px; color: #666; margin-bottom: 5px; font-weight: 600;">Tổng Doanh Thu</div>
+                            <div style="font-size: 18px; font-weight: 800; color: ${isProfit ? '#155724' : '#721c24'};">
+                                ${formatMoney(model.totalRevenue)}
+                            </div>
+                            <div style="font-size: 10px; color: ${isProfit ? '#155724' : '#721c24'}; margin-top: 3px;">
+                                ${formatMoney(avgRentPrice)}/SP
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background: ${isProfit ? '#d4edda' : '#f8d7da'}; padding: 12px; border-radius: 8px; border-left: 3px solid ${isProfit ? '#28a745' : '#dc3545'};">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="font-size: 12px; color: #666; font-weight: 600;">Tổng Lãi/Lỗ:</div>
+                            <div style="font-size: 20px; font-weight: 800; color: ${isProfit ? '#28a745' : '#dc3545'};">
+                                ${isProfit ? '+' : ''}${formatMoney(profit)} (${isProfit ? '+' : ''}${profitPercent}%)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <h4 style="font-size: 16px; font-weight: 800; color: #333; margin-bottom: 12px;">
+                        <i class="fas fa-box"></i> Danh Sách Sản Phẩm (${model.products.length})
+                    </h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; max-height: 500px; overflow-y: auto;">
+                        ${productsHtml}
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+        }
+
+        function closeModelDetailModal() {
+            document.getElementById('modelDetailModal').classList.remove('active');
+        }
+
+        // ESC key to close model detail modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' || e.keyCode === 27) {
+                const modelModal = document.getElementById('modelDetailModal');
+                if (modelModal && modelModal.classList.contains('active')) {
+                    closeModelDetailModal();
+                }
+            }
+        });
+
         function printInvoice(orderId) {
             // Lưu orderId để hoadon.html load
             localStorage.setItem('currentOrderId', orderId);
@@ -1999,10 +2888,10 @@
 
         function searchOrders() {
             const search = document.getElementById('orderSearch').value.toLowerCase();
-            const rows = document.querySelectorAll('#ordersTableBody tr');
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(search) ? '' : 'none';
+            const cards = document.querySelectorAll('#ordersContainer > div[data-order-id]');
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(search) ? '' : 'none';
             });
         }
 
@@ -2010,12 +2899,21 @@
         function loadStatistics() {
             const dbInstance = ensureDb();
             const now = new Date();
+            
+            // Calculate date ranges
             const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
             const weekStart = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
             const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+            
+            // Calculate quarter start (Q1: Jan-Mar, Q2: Apr-Jun, Q3: Jul-Sep, Q4: Oct-Dec)
+            const currentQuarter = Math.floor(now.getMonth() / 3);
+            const quarterStart = new Date(now.getFullYear(), currentQuarter * 3, 1);
+            
+            // Calculate year start
+            const yearStart = new Date(now.getFullYear(), 0, 1);
 
             dbInstance.collection('orders').get().then(snapshot => {
-                let todayRevenue = 0, weekRevenue = 0, monthRevenue = 0;
+                let todayRevenue = 0, weekRevenue = 0, monthRevenue = 0, quarterRevenue = 0, yearRevenue = 0;
                 const productStats = {};
 
                 snapshot.forEach(doc => {
@@ -2026,6 +2924,8 @@
                     if (orderDate >= todayStart) todayRevenue += total;
                     if (orderDate >= weekStart) weekRevenue += total;
                     if (orderDate >= monthStart) monthRevenue += total;
+                    if (orderDate >= quarterStart) quarterRevenue += total;
+                    if (orderDate >= yearStart) yearRevenue += total;
 
                     if (order.items && order.status === 'completed') {
                         order.items.forEach(item => {
@@ -2042,33 +2942,653 @@
                     }
                 });
 
+                // Update revenue displays
                 document.getElementById('todayRevenue').textContent = formatMoney(todayRevenue);
                 document.getElementById('weekRevenue').textContent = formatMoney(weekRevenue);
                 document.getElementById('monthRevenue').textContent = formatMoney(monthRevenue);
+                document.getElementById('quarterRevenue').textContent = formatMoney(quarterRevenue);
+                document.getElementById('yearRevenue').textContent = formatMoney(yearRevenue);
 
-                // Top products
+                // Store revenues for chart
+                allRevenues = {
+                    today: todayRevenue,
+                    week: weekRevenue,
+                    month: monthRevenue,
+                    quarter: quarterRevenue,
+                    year: yearRevenue
+                };
+
+                // Don't auto-load chart, wait for user to click on revenue card
+
+                // Top products - render as cards
                 const topProducts = Object.values(productStats)
                     .sort((a, b) => b.count - a.count)
                     .slice(0, 10);
                 
-                const tbody = document.getElementById('topProductsBody');
-                tbody.innerHTML = '';
+                const container = document.getElementById('topProductsContainer');
+                container.innerHTML = '';
                 if (topProducts.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 40px;">Chưa có dữ liệu</td></tr>';
+                    container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999;">Chưa có dữ liệu</div>';
                 } else {
                     topProducts.forEach((product, index) => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td>${index + 1}</td>
-                            <td>${product.name}</td>
-                            <td>${product.count}</td>
-                            <td>${formatMoney(product.revenue)}</td>
+                        const card = document.createElement('div');
+                        card.style.cssText = `
+                            background: linear-gradient(135deg, ${index < 3 ? '#667eea' : '#f8f9fa'} 0%, ${index < 3 ? '#764ba2' : '#e9ecef'} 100%);
+                            color: ${index < 3 ? 'white' : '#333'};
+                            padding: 12px;
+                            border-radius: 12px;
+                            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+                            transition: all 0.3s;
+                            position: relative;
+                            overflow: hidden;
                         `;
-                        tbody.appendChild(row);
+                        card.onmouseenter = function() {
+                            this.style.transform = 'translateY(-5px)';
+                            this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+                        };
+                        card.onmouseleave = function() {
+                            this.style.transform = 'translateY(0)';
+                            this.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+                        };
+                        
+                        const rankBadge = index < 3 ? `
+                            <div style="position: absolute; top: 6px; right: 6px; background: rgba(255,255,255,0.3); padding: 3px 8px; border-radius: 15px; font-weight: 800; font-size: 11px;">
+                                #${index + 1}
+                            </div>
+                        ` : '';
+                        
+                        card.innerHTML = `
+                            ${rankBadge}
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                                <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(255,255,255,${index < 3 ? '0.2' : '0.1'}); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800;">
+                                    ${index + 1}
+                                </div>
+                                <div style="flex: 1; min-width: 0;">
+                                    <div style="font-size: 14px; font-weight: 700; margin-bottom: 0; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                        ${product.name}
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,${index < 3 ? '0.3' : '0.15'});">
+                                <div>
+                                    <div style="font-size: 10px; opacity: ${index < 3 ? '0.9' : '0.7'}; margin-bottom: 4px; font-weight: 600;">Lượt Thuê</div>
+                                    <div style="font-size: 18px; font-weight: 800;">${product.count}</div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 10px; opacity: ${index < 3 ? '0.9' : '0.7'}; margin-bottom: 4px; font-weight: 600;">Doanh Thu</div>
+                                    <div style="font-size: 18px; font-weight: 800;">${formatMoney(product.revenue)}</div>
+                                </div>
+                            </div>
+                        `;
+                        container.appendChild(card);
                     });
                 }
             }).catch(error => {
                 console.error('Lỗi tải thống kê:', error);
+            });
+
+            // Load Model Statistics
+            loadModelStatistics();
+        }
+
+        let currentChartType = 'today';
+        let allRevenues = { today: 0, week: 0, month: 0, quarter: 0, year: 0 };
+        let chartDataPoints = {}; // Store detailed data points for line chart
+
+        // Show revenue chart when clicking on revenue cards
+        function showRevenueChart(type) {
+            // Show chart card
+            const chartCard = document.getElementById('revenueChartCard');
+            if (chartCard) {
+                chartCard.style.display = 'block';
+                // Scroll to chart
+                setTimeout(() => {
+                    chartCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }
+            
+            // Select the chart type
+            selectChartType(type);
+        }
+
+        // Select Chart Type
+        function selectChartType(type) {
+            currentChartType = type;
+            document.querySelectorAll('.chart-type-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-type') === type);
+            });
+            loadChartData(type);
+        }
+
+        // Load detailed chart data
+        function loadChartData(type) {
+            const dbInstance = ensureDb();
+            const now = new Date();
+            let startDate, endDate, dataPoints = [];
+            
+            if (type === 'today') {
+                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                endDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+                // Group by hours (24 points)
+                for (let i = 0; i < 24; i++) {
+                    dataPoints.push({ label: `${i}h`, date: new Date(startDate.getTime() + i * 60 * 60 * 1000), value: 0 });
+                }
+            } else if (type === 'week') {
+                startDate = new Date(now.getTime() - 6 * 24 * 60 * 60 * 1000);
+                startDate.setHours(0, 0, 0, 0);
+                endDate = new Date(now);
+                endDate.setHours(23, 59, 59, 999);
+                // Group by days (7 points)
+                for (let i = 0; i < 7; i++) {
+                    const date = new Date(startDate.getTime() + i * 24 * 60 * 60 * 1000);
+                    const dayName = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'][date.getDay()];
+                    dataPoints.push({ label: `${dayName} ${date.getDate()}/${date.getMonth() + 1}`, date: date, value: 0 });
+                }
+            } else if (type === 'month') {
+                startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+                endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
+                const daysInMonth = endDate.getDate();
+                // Group by days
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const date = new Date(now.getFullYear(), now.getMonth(), i);
+                    dataPoints.push({ label: `${i}/${now.getMonth() + 1}`, date: date, value: 0 });
+                }
+            } else if (type === 'quarter') {
+                const currentQuarter = Math.floor(now.getMonth() / 3);
+                startDate = new Date(now.getFullYear(), currentQuarter * 3, 1);
+                endDate = new Date(now.getFullYear(), (currentQuarter + 1) * 3, 0, 23, 59, 59);
+                // Group by months (3 points)
+                for (let i = 0; i < 3; i++) {
+                    const date = new Date(now.getFullYear(), currentQuarter * 3 + i, 1);
+                    dataPoints.push({ label: `Tháng ${date.getMonth() + 1}`, date: date, value: 0 });
+                }
+            } else if (type === 'year') {
+                startDate = new Date(now.getFullYear(), 0, 1);
+                endDate = new Date(now.getFullYear(), 11, 31, 23, 59, 59);
+                // Group by months (12 points)
+                for (let i = 0; i < 12; i++) {
+                    const date = new Date(now.getFullYear(), i, 1);
+                    dataPoints.push({ label: `Tháng ${i + 1}`, date: date, value: 0 });
+                }
+            }
+            
+            // Load orders and aggregate by time period
+            dbInstance.collection('orders').get().then(snapshot => {
+                snapshot.forEach(doc => {
+                    const order = doc.data();
+                    if (order.status !== 'completed') return;
+                    
+                    const orderDate = order.createdAt?.toDate ? order.createdAt.toDate() : new Date(order.createdAt);
+                    const total = order.total || 0;
+                    
+                    if (orderDate < startDate || orderDate > endDate) return;
+                    
+                    // Find which data point this order belongs to
+                    dataPoints.forEach(point => {
+                        if (type === 'today') {
+                            if (orderDate.getHours() === parseInt(point.label)) {
+                                point.value += total;
+                            }
+                        } else if (type === 'week' || type === 'month') {
+                            if (orderDate.getDate() === point.date.getDate() && 
+                                orderDate.getMonth() === point.date.getMonth() &&
+                                orderDate.getFullYear() === point.date.getFullYear()) {
+                                point.value += total;
+                            }
+                        } else if (type === 'quarter' || type === 'year') {
+                            if (orderDate.getMonth() === point.date.getMonth() &&
+                                orderDate.getFullYear() === point.date.getFullYear()) {
+                                point.value += total;
+                            }
+                        }
+                    });
+                });
+                
+                chartDataPoints[type] = dataPoints;
+                renderLineChart(type, dataPoints);
+            }).catch(error => {
+                console.error('Lỗi tải dữ liệu biểu đồ:', error);
+            });
+        }
+
+        // Smooth curve helper (Catmull-Rom spline) - but keep zero values at baseline and prevent upward curves when decreasing
+        function createSmoothPath(points, baselineY) {
+            if (points.length < 2) return '';
+            if (points.length === 2) {
+                return `M ${points[0].x} ${points[0].y} L ${points[1].x} ${points[1].y}`;
+            }
+            
+            let path = `M ${points[0].x} ${points[0].y}`;
+            
+            for (let i = 0; i < points.length - 1; i++) {
+                const p1 = points[i];
+                const p2 = points[i + 1];
+                
+                // If either point is at baseline (value = 0), use straight line
+                if (Math.abs(p1.y - baselineY) < 1 || Math.abs(p2.y - baselineY) < 1) {
+                    path += ` L ${p2.x} ${p2.y}`;
+                } else {
+                    // Use smooth curve only for non-zero values
+                    const p0 = points[Math.max(0, i - 1)];
+                    const p3 = points[Math.min(points.length - 1, i + 2)];
+                    
+                    // Calculate control points
+                    let cp1x = p1.x + (p2.x - p0.x) / 6;
+                    let cp1y = p1.y + (p2.y - p0.y) / 6;
+                    let cp2x = p2.x - (p3.x - p1.x) / 6;
+                    let cp2y = p2.y - (p3.y - p1.y) / 6;
+                    
+                    // Clamp control points to not go below baseline
+                    cp1y = Math.max(cp1y, baselineY);
+                    cp2y = Math.max(cp2y, baselineY);
+                    
+                    // Prevent upward curves when value is decreasing (p2.y > p1.y means value decreased)
+                    // In SVG, y increases downward, so higher y = lower value
+                    if (p2.y > p1.y) {
+                        // Value is decreasing - ensure control points don't go above p1.y (don't curve upward)
+                        cp1y = Math.min(cp1y, p1.y);
+                        cp2y = Math.min(cp2y, p2.y);
+                    } else if (p2.y < p1.y) {
+                        // Value is increasing - ensure control points don't go below p1.y (don't curve downward)
+                        cp1y = Math.max(cp1y, p1.y);
+                        cp2y = Math.max(cp2y, p2.y);
+                    }
+                    
+                    path += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y}`;
+                }
+            }
+            
+            return path;
+        }
+
+        // Render Line Chart
+        function renderLineChart(type, dataPoints) {
+            const svg = document.getElementById('revenueChart');
+            const labelsContainer = document.getElementById('chartLabels');
+            const yAxisContainer = document.getElementById('yAxis');
+            const gridContainer = document.getElementById('chartGrid');
+            
+            svg.innerHTML = '';
+            labelsContainer.innerHTML = '';
+            yAxisContainer.innerHTML = '';
+            gridContainer.innerHTML = '';
+            
+            if (!dataPoints || dataPoints.length === 0) {
+                svg.innerHTML = '<text x="400" y="195" text-anchor="middle" fill="#999" font-size="16" font-weight="600">Chưa có dữ liệu</text>';
+                return;
+            }
+            
+            const values = dataPoints.map(p => p.value);
+            const maxValue = Math.max(...values, 1) * 1.1; // 10% padding
+            const chartWidth = 800;
+            const chartHeight = 390;
+            const padding = { top: 30, right: 50, bottom: 60, left: 0 };
+            const plotWidth = chartWidth - padding.left - padding.right;
+            const plotHeight = chartHeight - padding.top - padding.bottom;
+            
+            // Color scheme based on type
+            const colorSchemes = {
+                today: { line: '#667eea', area: '#667eea', dot: '#667eea' },
+                week: { line: '#f093fb', area: '#f5576c', dot: '#f5576c' },
+                month: { line: '#4facfe', area: '#00f2fe', dot: '#4facfe' },
+                quarter: { line: '#43e97b', area: '#38f9d7', dot: '#43e97b' },
+                year: { line: '#fa709a', area: '#fee140', dot: '#fa709a' }
+            };
+            const colors = colorSchemes[type] || colorSchemes.month;
+            
+            // Create Y-axis labels
+            const ySteps = 5;
+            for (let i = ySteps; i >= 0; i--) {
+                const value = (maxValue / ySteps) * i;
+                const yLabel = document.createElement('div');
+                yLabel.style.cssText = `
+                    font-size: 13px;
+                    font-weight: 700;
+                    color: #495057;
+                    text-align: right;
+                `;
+                yLabel.textContent = formatCompact(value);
+                yAxisContainer.appendChild(yLabel);
+            }
+            
+            // Create grid lines
+            for (let i = 0; i <= ySteps; i++) {
+                const y = (i / ySteps) * plotHeight;
+                const gridLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                gridLine.setAttribute('x1', padding.left);
+                gridLine.setAttribute('y1', padding.top + y);
+                gridLine.setAttribute('x2', chartWidth - padding.right);
+                gridLine.setAttribute('y2', padding.top + y);
+                gridLine.setAttribute('stroke', i === 0 ? '#cbd5e0' : '#f1f5f9');
+                gridLine.setAttribute('stroke-width', i === 0 ? '2' : '1');
+                gridLine.setAttribute('stroke-dasharray', i === 0 ? '0' : '3,3');
+                svg.appendChild(gridLine);
+            }
+            
+            // Calculate points - ensure zero values are exactly at baseline
+            const baselineY = padding.top + plotHeight;
+            const points = dataPoints.map((point, index) => {
+                const x = padding.left + (index / (dataPoints.length - 1 || 1)) * plotWidth;
+                // If value is 0 or very close to 0, use baseline Y exactly
+                const y = point.value <= 0 ? baselineY : padding.top + plotHeight - (point.value / maxValue) * plotHeight;
+                return { x, y, ...point };
+            });
+            
+            // Create gradient definitions
+            const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            
+            // Area gradient
+            const areaGradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+            areaGradient.setAttribute('id', 'areaGradient');
+            areaGradient.setAttribute('x1', '0%');
+            areaGradient.setAttribute('y1', '0%');
+            areaGradient.setAttribute('x2', '0%');
+            areaGradient.setAttribute('y2', '100%');
+            const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+            stop1.setAttribute('offset', '0%');
+            stop1.setAttribute('stop-color', colors.area);
+            stop1.setAttribute('stop-opacity', '0.4');
+            const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+            stop2.setAttribute('offset', '100%');
+            stop2.setAttribute('stop-color', colors.area);
+            stop2.setAttribute('stop-opacity', '0');
+            areaGradient.appendChild(stop1);
+            areaGradient.appendChild(stop2);
+            defs.appendChild(areaGradient);
+            
+            // Dot gradient
+            const dotGradient = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
+            dotGradient.setAttribute('id', 'dotGradient');
+            const dotStop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+            dotStop1.setAttribute('offset', '0%');
+            dotStop1.setAttribute('stop-color', colors.dot);
+            dotStop1.setAttribute('stop-opacity', '1');
+            const dotStop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+            dotStop2.setAttribute('offset', '100%');
+            dotStop2.setAttribute('stop-color', colors.dot);
+            dotStop2.setAttribute('stop-opacity', '0.7');
+            dotGradient.appendChild(dotStop1);
+            dotGradient.appendChild(dotStop2);
+            defs.appendChild(dotGradient);
+            
+            // Drop shadow filter
+            const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
+            filter.setAttribute('id', 'shadow');
+            const feGaussianBlur = document.createElementNS('http://www.w3.org/2000/svg', 'feGaussianBlur');
+            feGaussianBlur.setAttribute('in', 'SourceAlpha');
+            feGaussianBlur.setAttribute('stdDeviation', '3');
+            const feOffset = document.createElementNS('http://www.w3.org/2000/svg', 'feOffset');
+            feOffset.setAttribute('dx', '0');
+            feOffset.setAttribute('dy', '2');
+            feOffset.setAttribute('result', 'offsetblur');
+            const feComponentTransfer = document.createElementNS('http://www.w3.org/2000/svg', 'feComponentTransfer');
+            feComponentTransfer.setAttribute('in', 'offsetblur');
+            const feFuncA = document.createElementNS('http://www.w3.org/2000/svg', 'feFuncA');
+            feFuncA.setAttribute('type', 'linear');
+            feFuncA.setAttribute('slope', '0.3');
+            const feMerge = document.createElementNS('http://www.w3.org/2000/svg', 'feMerge');
+            const feMergeNode1 = document.createElementNS('http://www.w3.org/2000/svg', 'feMergeNode');
+            const feMergeNode2 = document.createElementNS('http://www.w3.org/2000/svg', 'feMergeNode');
+            feMergeNode2.setAttribute('in', 'SourceGraphic');
+            feMerge.appendChild(feMergeNode1);
+            feMerge.appendChild(feMergeNode2);
+            filter.appendChild(feGaussianBlur);
+            filter.appendChild(feOffset);
+            filter.appendChild(feComponentTransfer);
+            feComponentTransfer.appendChild(feFuncA);
+            filter.appendChild(feMerge);
+            defs.appendChild(filter);
+            
+            svg.insertBefore(defs, svg.firstChild);
+            
+            // Create smooth area path - ensure zero values stay at baseline
+            const smoothPath = createSmoothPath(points, baselineY);
+            
+            // For area, use smooth path but ensure it connects to baseline
+            let areaPath = `M ${points[0].x} ${baselineY}`;
+            // Use smooth path for the curve part
+            const smoothPathWithoutMove = smoothPath.replace(/^M [\d.]+ [\d.]+ /, '');
+            areaPath += ' ' + smoothPathWithoutMove;
+            areaPath += ` L ${points[points.length - 1].x} ${baselineY} Z`;
+            
+            const area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            area.setAttribute('d', areaPath);
+            area.setAttribute('fill', 'url(#areaGradient)');
+            area.style.transition = 'opacity 0.3s';
+            svg.appendChild(area);
+            
+            // Create smooth line path
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            line.setAttribute('d', smoothPath);
+            line.setAttribute('fill', 'none');
+            line.setAttribute('stroke', colors.line);
+            line.setAttribute('stroke-width', '3.5');
+            line.setAttribute('stroke-linecap', 'round');
+            line.setAttribute('stroke-linejoin', 'round');
+            line.setAttribute('filter', 'url(#shadow)');
+            line.style.transition = 'opacity 0.3s';
+            svg.appendChild(line);
+            
+            // Create dots and tooltips
+            const tooltip = document.createElement('div');
+            tooltip.className = 'chart-tooltip';
+            tooltip.id = 'chartTooltip';
+            const chartParent = document.querySelector('#revenueChart').parentElement;
+            if (!document.getElementById('chartTooltip')) {
+                chartParent.appendChild(tooltip);
+            }
+            
+            points.forEach((point, index) => {
+                // Outer glow circle
+                const glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                glow.setAttribute('cx', point.x);
+                glow.setAttribute('cy', point.y);
+                glow.setAttribute('r', '8');
+                glow.setAttribute('fill', colors.dot);
+                glow.setAttribute('opacity', '0.2');
+                glow.style.transition = 'all 0.3s';
+                svg.appendChild(glow);
+                
+                // Main dot
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', point.x);
+                circle.setAttribute('cy', point.y);
+                circle.setAttribute('r', '6');
+                circle.setAttribute('fill', 'url(#dotGradient)');
+                circle.setAttribute('stroke', 'white');
+                circle.setAttribute('stroke-width', '3');
+                circle.style.cursor = 'pointer';
+                circle.style.transition = 'all 0.3s';
+                
+                circle.addEventListener('mouseenter', function(e) {
+                    this.setAttribute('r', '9');
+                    glow.setAttribute('r', '12');
+                    glow.setAttribute('opacity', '0.4');
+                    
+                    const tooltipEl = document.getElementById('chartTooltip');
+                    tooltipEl.innerHTML = `
+                        <div style="font-weight: 700; margin-bottom: 4px;">${point.label}</div>
+                        <div style="font-size: 18px; font-weight: 800; color: ${colors.line};">${formatMoney(point.value)}</div>
+                    `;
+                    tooltipEl.classList.add('show');
+                    const rect = svg.getBoundingClientRect();
+                    const parentRect = chartParent.getBoundingClientRect();
+                    tooltipEl.style.left = (rect.left + point.x - parentRect.left) + 'px';
+                    tooltipEl.style.top = (rect.top + point.y - parentRect.top - 50) + 'px';
+                    tooltipEl.style.transform = 'translateX(-50%)';
+                });
+                
+                circle.addEventListener('mouseleave', function() {
+                    this.setAttribute('r', '6');
+                    glow.setAttribute('r', '8');
+                    glow.setAttribute('opacity', '0.2');
+                    const tooltipEl = document.getElementById('chartTooltip');
+                    tooltipEl.classList.remove('show');
+                });
+                
+                svg.appendChild(circle);
+                
+                // X-axis labels
+                const label = document.createElement('div');
+                label.style.cssText = `
+                    font-size: 12px;
+                    font-weight: 600;
+                    color: #64748b;
+                    text-align: center;
+                    flex: 1;
+                    min-width: 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                `;
+                label.textContent = point.label;
+                labelsContainer.appendChild(label);
+            });
+            
+            // Animate chart
+            line.style.opacity = '0';
+            area.style.opacity = '0';
+            setTimeout(() => {
+                line.style.opacity = '1';
+                area.style.opacity = '1';
+            }, 100);
+        }
+
+        // Load Model Statistics - Hiển thị từng sản phẩm riêng lẻ
+        function loadModelStatistics() {
+            const dbInstance = ensureDb();
+            
+            // Load products
+            dbInstance.collection('products').get().then(productsSnapshot => {
+                const products = [];
+                
+                productsSnapshot.forEach(doc => {
+                    const p = doc.data();
+                    if (p.deleted === true) return;
+                    
+                    // Extract model from ID (e.g., "SP01" -> "SP", "VAY001" -> "VAY", "DB01" -> "DB")
+                    let model = 'Khác';
+                    if (p.id) {
+                        const match = p.id.match(/^([A-Z]+)/);
+                        if (match) model = match[1];
+                    } else if (p.name) {
+                        const words = p.name.split(' ');
+                        if (words.length > 0) model = words[0];
+                    }
+                    
+                    const totalStock = Object.values(p.sizes || {}).reduce((acc, curr) => acc + curr, 0);
+                    const importPrice = p.importPrice || 0;
+                    const rentPrice = p.rentPrice || 0;
+                    const rentalCount = p.rentalCount || 0;
+                    const importCost = importPrice * totalStock;
+                    const revenue = rentPrice * rentalCount;
+                    const profit = revenue - importCost;
+                    const profitPercent = importCost > 0 ? Math.round((profit / importCost) * 100) : 0;
+                    
+                    products.push({
+                        ...p,
+                        model: model,
+                        totalStock: totalStock,
+                        importCost: importCost,
+                        revenue: revenue,
+                        profit: profit,
+                        profitPercent: profitPercent
+                    });
+                });
+                
+                const container = document.getElementById('modelStatsContainer');
+                container.innerHTML = '';
+                
+                // Sort by revenue descending
+                products.sort((a, b) => b.revenue - a.revenue);
+                
+                if (products.length === 0) {
+                    container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999;">Chưa có dữ liệu</div>';
+                    return;
+                }
+                
+                products.forEach((product, index) => {
+                    const isProfit = product.profit >= 0;
+                    const mainImage = (product.images && Array.isArray(product.images) && product.images.length > 0)
+                        ? product.images[0]
+                        : (product.image || 'https://via.placeholder.com/100');
+                    
+                    const card = document.createElement('div');
+                    card.style.cssText = `
+                        background: white;
+                        padding: 12px;
+                        border-radius: 12px;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                        border: 1px solid ${isProfit ? '#d4edda' : '#f8d7da'};
+                        transition: all 0.3s;
+                        width: 100%;
+                        box-sizing: border-box;
+                        min-width: 0;
+                    `;
+                    card.onmouseenter = function() {
+                        this.style.transform = 'translateY(-3px)';
+                        this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                    };
+                    card.onmouseleave = function() {
+                        this.style.transform = 'translateY(0)';
+                        this.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
+                    };
+                    
+                    card.innerHTML = `
+                        <div style="width: 100%; height: 100px; overflow: hidden; background: #f8f9fa; border-radius: 8px; margin-bottom: 10px;">
+                            <img src="${mainImage}" 
+                                 style="width: 100%; height: 100%; object-fit: cover;" 
+                                 onerror="this.src='https://via.placeholder.com/260'">
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <div style="font-size: 13px; font-weight: 800; color: #333; margin-bottom: 4px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                ${product.name || 'N/A'}
+                            </div>
+                            <div style="font-size: 9px; color: #999; margin-bottom: 6px;">Model: ${product.model} | ID: ${product.id || 'N/A'}</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 10px;">
+                            <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
+                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Giá Vốn</div>
+                                <div style="font-size: 11px; font-weight: 800; color: #333;">${formatMoney(product.importPrice || 0)}</div>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
+                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Giá Thuê</div>
+                                <div style="font-size: 11px; font-weight: 800; color: #c62828;">${formatMoney(product.rentPrice || 0)}</div>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
+                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Tồn</div>
+                                <div style="font-size: 11px; font-weight: 800; color: #28a745;">${product.totalStock}</div>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 8px; border-radius: 6px;">
+                                <div style="font-size: 9px; color: #666; margin-bottom: 3px; font-weight: 600;">Thuê</div>
+                                <div style="font-size: 11px; font-weight: 800; color: #ffc107;">${product.rentalCount || 0}</div>
+                            </div>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                            <div style="font-size: 9px; color: #666; margin-bottom: 4px; font-weight: 600;">Vốn Nhập</div>
+                            <div style="font-size: 13px; font-weight: 800; color: #495057;">${formatMoney(product.importCost)}</div>
+                        </div>
+                        <div style="background: linear-gradient(135deg, ${isProfit ? '#d4edda' : '#f8d7da'} 0%, ${isProfit ? '#c3e6cb' : '#f5c6cb'} 100%); padding: 10px; border-radius: 8px; margin-bottom: 10px; border: 1px solid ${isProfit ? '#c3e6cb' : '#f5c6cb'};">
+                            <div style="font-size: 9px; color: #666; margin-bottom: 4px; font-weight: 600;">Doanh Thu</div>
+                            <div style="font-size: 13px; font-weight: 800; color: ${isProfit ? '#155724' : '#721c24'};">
+                                ${formatMoney(product.revenue)}
+                            </div>
+                        </div>
+                        <div style="background: ${isProfit ? '#d4edda' : '#f8d7da'}; padding: 8px; border-radius: 6px; border-left: 3px solid ${isProfit ? '#28a745' : '#dc3545'};">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="font-size: 9px; color: #666; font-weight: 600;">Lãi/Lỗ:</div>
+                                <div style="font-size: 13px; font-weight: 800; color: ${isProfit ? '#28a745' : '#dc3545'};">
+                                    ${isProfit ? '+' : ''}${formatMoney(product.profit)}
+                                </div>
+                            </div>
+                            <div style="text-align: right; font-size: 9px; color: ${isProfit ? '#28a745' : '#dc3545'}; font-weight: 600; margin-top: 2px;">
+                                (${isProfit ? '+' : ''}${product.profitPercent}%)
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }).catch(error => {
+                console.error('Lỗi tải thống kê model:', error);
             });
         }
 
@@ -2172,9 +3692,10 @@
         // Initialize
         checkAuth();
         if (localStorage.getItem('adminLoggedIn') === 'true') {
-            loadDashboard();
+            restoreActiveTab();
         }
     </script>
 </body>
 </html>
+
 

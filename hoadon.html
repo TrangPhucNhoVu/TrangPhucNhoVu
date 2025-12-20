@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- Firebase (Compat SDK) - required for `firebase-config.js` to create `db` -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -59,7 +60,12 @@
                 margin: 0;
             }
             .no-print {
-                display: none;
+                display: none !important;
+            }
+            .delete-row-btn,
+            .table-cell.no-print,
+            th.no-print {
+                display: none !important;
             }
             .a4-container {
                 margin: 0;
@@ -157,11 +163,12 @@
                 <thead>
                     <tr>
                         <th class="header-cell" style="width: 5%;">STT</th>
-                        <th class="header-cell" style="width: 45%;">TÊN SẢN PHẨM</th>
+                        <th class="header-cell" style="width: 40%;">TÊN SẢN PHẨM</th>
                         <th class="header-cell" style="width: 10%;">SỐ LƯỢNG</th>
                         <th class="header-cell" style="width: 15%;">ĐƠN GIÁ</th>
                         <th class="header-cell" style="width: 15%;">TỔNG TIỀN</th>
                         <th class="header-cell" style="width: 10%;">GHI CHÚ</th>
+                        <th class="header-cell no-print" style="width: 5%;">XÓA</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -265,6 +272,13 @@
             loadStatusEl.textContent = message;
         }
         
+        const updateRowNumbers = () => {
+            const rows = tableBody.querySelectorAll('tr');
+            rows.forEach((row, index) => {
+                row.querySelector('td:first-child').textContent = index + 1;
+            });
+        };
+
         const createRow = () => {
             rowCount++;
             const row = document.createElement('tr');
@@ -275,8 +289,24 @@
                 <td class="table-cell"><input type="text" class="w-full text-right p-1 focus:outline-none unit-price bg-transparent" value="0"></td>
                 <td class="table-cell text-right font-semibold px-2 py-1 total">0</td>
                 <td class="table-cell"><input type="text" class="w-full text-left p-1 focus:outline-none bg-transparent"></td>
+                <td class="table-cell no-print">
+                    <button class="delete-row-btn px-2 py-1 bg-red-500 text-white text-xs rounded hover:bg-red-600 focus:outline-none" onclick="deleteRow(this)">
+                        <i class="fas fa-trash"></i> Xóa
+                    </button>
+                </td>
             `;
             tableBody.appendChild(row);
+        };
+
+        const deleteRow = (btn) => {
+            const row = btn.closest('tr');
+            if (row && tableBody.querySelectorAll('tr').length > 1) {
+                row.remove();
+                updateRowNumbers();
+                calculateTotals();
+            } else {
+                alert('Phải có ít nhất 1 dòng trong bảng!');
+            }
         };
 
         const calculateFinalPayment = () => {
@@ -417,6 +447,11 @@
                         <td class="table-cell"><input type="text" class="w-full text-right p-1 focus:outline-none unit-price bg-transparent" value="${formatCurrency(itemPrice)}"></td>
                         <td class="table-cell text-right font-semibold px-2 py-1 total">${formatCurrency(itemPrice * itemQuantity)}</td>
                         <td class="table-cell"><input type="text" class="w-full text-left p-1 focus:outline-none bg-transparent" value="${item.note || order.notes || ''}"></td>
+                        <td class="table-cell no-print">
+                            <button class="delete-row-btn px-2 py-1 bg-red-500 text-white text-xs rounded hover:bg-red-600 focus:outline-none" onclick="deleteRow(this)">
+                                <i class="fas fa-trash"></i> Xóa
+                            </button>
+                        </td>
                     `;
                     tableBody.appendChild(row);
                 });

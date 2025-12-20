@@ -13,20 +13,13 @@
         * { box-sizing: border-box; }
         body { 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 20%, #f093fb 40%, #f5576c 60%, #4facfe 80%, #00f2fe 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            background: linear-gradient(135deg, #fff8e1 0%, #ffe0b2 50%, #ffccbc 100%);
             margin: 0; 
-            padding: 15px;
+            padding: 10px;
             min-height: 100vh;
         }
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
         .container { 
-            max-width: 1200px; 
+            max-width: 1400px; 
             margin: 0 auto; 
             padding-bottom: 60px; 
         }
@@ -36,58 +29,43 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            margin-bottom: 25px; 
+            margin-bottom: 20px; 
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 20px 30px; 
-            border-radius: 20px; 
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255,255,255,0.3);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        header:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-            background: rgba(255, 255, 255, 1);
+            padding: 15px 25px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255,255,255,0.5);
         }
         h1 { 
-            background: linear-gradient(135deg, #ee4d2d 0%, #ff6b6b 50%, #ee4d2d 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #c62828;
             margin: 0; 
-            font-size: 28px; 
+            font-size: 24px; 
             font-weight: 800; 
             text-transform: uppercase;
-            letter-spacing: 1px;
-            background-size: 200% auto;
-            animation: shimmer 3s linear infinite;
-        }
-        @keyframes shimmer {
-            to { background-position: 200% center; }
+            letter-spacing: 0.5px;
         }
         .header-right { 
             display: flex; 
             align-items: center; 
-            gap: 15px; 
+            gap: 12px; 
         }
         .admin-link { 
             color: #666; 
             text-decoration: none; 
-            font-size: 14px; 
-            padding: 8px 15px; 
+            font-size: 13px; 
+            padding: 6px 12px; 
             border-radius: 6px; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
         }
         .admin-link:hover { 
-            background: linear-gradient(135deg, #fff0eb 0%, #ffece5 100%);
-            color: #ee4d2d;
-            transform: translateY(-1px);
+            background: #fff3e0;
+            color: #c62828;
         }
         .cart-icon { 
             position: relative; 
-            font-size: 26px; 
-            color: #ee4d2d; 
+            font-size: 24px; 
+            color: #c62828; 
             cursor: pointer;
             transition: transform 0.3s;
         }
@@ -98,111 +76,169 @@
             position: absolute; 
             top: -8px; 
             right: -10px; 
-            background: linear-gradient(135deg, #ee4d2d 0%, #d43f1f 100%);
+            background: #c62828;
             color: white; 
-            font-size: 12px; 
-            padding: 3px 7px; 
+            font-size: 11px; 
+            padding: 2px 6px; 
             border-radius: 10px; 
             border: 2px solid white; 
             font-weight: bold;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
         }
 
-        /* Lưới sản phẩm */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 15px;
-        }
-
-        /* --- THẺ SẢN PHẨM --- */
-        .product-card {
+        /* Filter Section */
+        .filter-section {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            padding: 15px 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             display: flex;
-            flex-direction: column;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            border: 1px solid rgba(255,255,255,0.5);
-            animation: fadeInUp 0.4s ease-out backwards;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
         }
-        .product-card:nth-child(1) { animation-delay: 0.05s; }
-        .product-card:nth-child(2) { animation-delay: 0.1s; }
-        .product-card:nth-child(3) { animation-delay: 0.15s; }
-        .product-card:nth-child(4) { animation-delay: 0.2s; }
-        .product-card:hover { 
-            border-color: rgba(238, 77, 45, 0.5); 
-            transform: translateY(-4px) scale(1.02); 
-            box-shadow: 0 8px 24px rgba(238, 77, 45, 0.2);
-            background: rgba(255, 255, 255, 1);
+        .filter-label {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
         }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            flex: 1;
+        }
+        .filter-tag {
+            padding: 6px 14px;
+            background: #fff3e0;
+            border: 2px solid #ffcc80;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: #c62828;
+            transition: all 0.3s;
+        }
+        .filter-tag:hover {
+            background: #ffe0b2;
+            transform: translateY(-2px);
+        }
+        .filter-tag.active {
+            background: #c62828;
+            color: white;
+            border-color: #c62828;
         }
 
-        /* Ảnh & Badge */
+        /* Lưới sản phẩm - Compact hơn */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        /* --- THẺ SẢN PHẨM - Compact --- */
+        .product-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+        .product-card:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 6px 20px rgba(198, 40, 40, 0.15);
+        }
+
+        /* Ảnh với carousel */
         .image-box {
             position: relative;
             width: 100%;
             padding-top: 100%;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-bottom: 2px solid rgba(238, 77, 45, 0.1);
+            background: #f5f5f5;
             overflow: hidden;
         }
-        .image-box::before {
-            content: '';
+        .image-box img {
             position: absolute;
             top: 0;
-            left: -100%;
+            left: 0; 
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
-            z-index: 2;
+            object-fit: cover;
+            transition: opacity 0.3s;
+            cursor: pointer;
         }
-        .product-card:hover .image-box::before {
-            left: 100%;
+        .image-box img:hover {
+            opacity: 0.9;
         }
-        .image-box img {
+        .image-nav {
             position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            object-fit: contain;
-            transition: transform 0.5s;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 10;
         }
-        .product-card:hover .image-box img {
-            transform: scale(1.1);
+        .image-nav.prev {
+            left: 5px;
         }
-        
-
+        .image-nav.next {
+            right: 5px;
+        }
+        .product-card:hover .image-nav {
+            opacity: 1;
+        }
+        .image-nav:hover {
+            background: rgba(198, 40, 40, 0.8);
+        }
+        .image-indicator {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 4px;
+            z-index: 10;
+        }
+        .image-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .image-dot.active {
+            background: white;
+            width: 20px;
+            border-radius: 10px;
+        }
         .image-count-badge {
             position: absolute;
             top: 8px;
-            left: 8px;
+            right: 8px;
             background: rgba(0,0,0,0.7);
             color: white;
-            padding: 4px 8px;
+            padding: 3px 7px;
             border-radius: 12px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
-            z-index: 3;
-            backdrop-filter: blur(5px);
+            z-index: 5;
         }
         .out-of-stock-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -211,210 +247,245 @@
         .out-of-stock-label {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             background: rgba(50,50,50,0.95); color: white; border-radius: 50%;
-            width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;
-            font-size: 12px; text-align: center; font-weight: bold; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
+            font-size: 11px; text-align: center; font-weight: bold; z-index: 2;
+        }
+
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+        .image-modal.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .image-modal-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 80px;
+        }
+        .image-modal-content img {
+            max-width: 100%;
+            max-height: calc(100vh - 200px);
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+        }
+        .image-modal-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #c62828;
+            color: white;
+            border: 3px solid white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            transition: all 0.3s;
+            z-index: 10001;
+            box-shadow: 0 6px 20px rgba(198, 40, 40, 0.6);
+        }
+        .image-modal-nav:hover {
+            background: #b71c1c;
+            border-color: #ffccbc;
+            transform: translateY(-50%) scale(1.2);
+            box-shadow: 0 8px 25px rgba(198, 40, 40, 0.8);
+        }
+        .image-modal-nav.prev {
+            left: 20px;
+        }
+        .image-modal-nav.next {
+            right: 20px;
+        }
+        .image-modal-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #c62828;
+            color: white;
+            border: 3px solid white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            transition: all 0.3s;
+            z-index: 10001;
+            box-shadow: 0 6px 20px rgba(198, 40, 40, 0.6);
+        }
+        .image-modal-close:hover {
+            background: #b71c1c;
+            border-color: #ffccbc;
+            transform: scale(1.2);
+            box-shadow: 0 8px 25px rgba(198, 40, 40, 0.8);
+        }
+        .image-modal-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #c62828;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 800;
+            border: 3px solid white;
+            box-shadow: 0 6px 20px rgba(198, 40, 40, 0.6);
+            z-index: 10001;
         }
 
         .info { 
-            padding: 12px; 
+            padding: 10px; 
             display: flex; 
             flex-direction: column; 
             flex-grow: 1; 
-            background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,1));
         }
         
         .title { 
-            font-size: 16px; 
+            font-size: 14px; 
             font-weight: 700; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 6px; 
+            color: #333;
+            margin-bottom: 4px; 
             line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         .desc { 
-            font-size: 12px; 
+            font-size: 11px; 
             color: #666; 
-            margin-bottom: 10px; 
-            height: 32px; 
+            margin-bottom: 8px; 
+            height: 28px; 
             overflow: hidden; 
             display: -webkit-box; 
             -webkit-line-clamp: 2;
             line-clamp: 2;
-            -webkit-box-orient: vertical; 
-            line-height: 1.4;
+            line-height: 1.3;
             font-style: italic;
         }
         
         .size-area { 
             display: flex; 
-            gap: 5px; 
-            margin-bottom: 12px; 
+            gap: 4px; 
+            margin-bottom: 8px; 
             flex-wrap: wrap; 
         }
         .size-tag { 
-            font-size: 10px; 
+            font-size: 9px; 
             border: 1px solid #e0e0e0; 
-            padding: 4px 8px; 
-            border-radius: 12px; 
+            padding: 3px 6px; 
+            border-radius: 8px; 
             color: #555; 
-            background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+            background: #f5f5f5;
             font-weight: 600;
-            transition: all 0.3s;
-        }
-        .size-tag:hover {
-            border-color: #ee4d2d;
-            background: linear-gradient(135deg, #fff0eb 0%, #ffece5 100%);
-            transform: translateY(-1px);
         }
 
         .price-row {
             display: flex; 
             justify-content: center; 
             align-items: center;
-            margin-bottom: 12px; 
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee4d2d 50%, #ff6b6b 100%);
-            background-size: 200% auto;
-            animation: shimmer 3s linear infinite;
+            margin-bottom: 8px; 
+            background: linear-gradient(135deg, #c62828 0%, #d32f2f 100%);
             border: none; 
-            padding: 10px; 
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(238, 77, 45, 0.25);
-            position: relative;
-            overflow: hidden;
+            padding: 8px; 
+            border-radius: 8px;
         }
-        .price-row::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
-            animation: rotate 3s linear infinite;
-        }
-        @keyframes rotate {
-            to { transform: rotate(360deg); }
-        }
-        .p-block { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-        .p-label { 
-            font-size: 9px; 
-            color: rgba(255,255,255,0.9); 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            margin-bottom: 4px;
-            letter-spacing: 0.5px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-        }
-        
         .price-rent { 
             color: white; 
-            font-size: 20px; 
+            font-size: 16px; 
             font-weight: 800; 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            letter-spacing: 0.3px;
         }
 
         .stock-info {
             display: flex;
             justify-content: space-around;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 10px;
-            border-radius: 10px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(233, 236, 239, 0.5);
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+            background: #f5f5f5;
+            padding: 6px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 11px;
         }
         .stock-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
-            padding: 6px 8px;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-        .stock-item:hover {
-            background: rgba(255,255,255,0.5);
-            transform: translateY(-1px);
+            gap: 2px;
         }
         .stock-label {
-            font-size: 10px;
+            font-size: 9px;
             color: #666;
             font-weight: 600;
         }
         .stock-value {
-            font-size: 16px;
+            font-size: 13px;
             font-weight: 800;
             color: #333;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
 
         .action-area { 
             display: flex; 
-            gap: 8px; 
+            gap: 6px; 
             margin-top: auto; 
         }
         .btn {
             flex: 1; 
-            padding: 10px 0; 
-            font-size: 12px; 
+            padding: 8px 0; 
+            font-size: 11px; 
             cursor: pointer; 
-            border-radius: 8px;
+            border-radius: 6px;
             display: flex; 
             align-items: center; 
             justify-content: center; 
             font-weight: 700; 
             border: none; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
+            transition: all 0.3s;
         }
         .btn-cart {
-            background: linear-gradient(135deg, #fff0eb 0%, #ffece5 100%);
-            color: #ee4d2d; 
-            border: 2px solid #ee4d2d;
+            background: #fff3e0;
+            color: #c62828; 
+            border: 1px solid #ffcc80;
         }
         .btn-cart:hover { 
-            background: linear-gradient(135deg, #ffece5 0%, #ffd6cc 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(238, 77, 45, 0.3);
+            background: #ffe0b2;
+            transform: translateY(-1px);
         }
         
         .btn-buy {
-            background: linear-gradient(135deg, #ee4d2d 0%, #d43f1f 100%);
+            background: #c62828;
             color: white;
-            box-shadow: 0 4px 15px rgba(238, 77, 45, 0.4);
         }
         .btn-buy:hover { 
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(238, 77, 45, 0.5);
-        }
-        .btn-buy:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(198, 40, 40, 0.3);
         }
 
         .disabled { background: #e0e0e0 !important; color: #999 !important; border: 1px solid #e0e0e0 !important; cursor: not-allowed; box-shadow: none !important;}
@@ -448,7 +519,7 @@
             border-bottom: 2px solid #f0f0f0;
         }
         .cart-header h2 {
-            color: #ee4d2d;
+            color: #c62828;
             margin: 0;
         }
         .close-cart {
@@ -469,11 +540,107 @@
         .cart-item-info { flex: 1; }
         .cart-item-name { font-weight: bold; margin-bottom: 5px; }
         .cart-item-details { font-size: 12px; color: #666; }
-        .cart-item-price { font-weight: bold; color: #ee4d2d; }
+        .cart-item-price { font-weight: bold; color: #c62828; }
         .remove-item { color: red; cursor: pointer; padding: 5px; }
 
         /* Loading */
         .loading { text-align: center; padding: 40px; font-size: 18px; color: #666; }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 300px;
+            animation: slideInRight 0.3s ease-out;
+            font-weight: 600;
+        }
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        .toast i {
+            font-size: 24px;
+        }
+        .toast.error {
+            background: #dc3545;
+        }
+        .toast.warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+        /* Order Status Section */
+        .order-status-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            display: none;
+        }
+        .order-status-section.active {
+            display: block;
+        }
+        .order-status-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #c62828;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .order-status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .order-status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .order-status-badge.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .order-status-badge.confirmed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        .order-status-badge.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+        .order-status-badge.cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .order-list-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .order-status-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
 
         /* Checkout Modal */
         .checkout-modal {
@@ -495,7 +662,6 @@
             overflow-y: auto;
             padding: 30px;
             position: relative;
-            animation: slideIn 0.3s ease-out;
         }
         .checkout-header {
             display: flex;
@@ -506,7 +672,7 @@
             border-bottom: 2px solid #f0f0f0;
         }
         .checkout-header h2 {
-            color: #ee4d2d;
+            color: #c62828;
             margin: 0;
         }
         .close-checkout {
@@ -538,7 +704,7 @@
         .checkout-form-group input:focus,
         .checkout-form-group textarea:focus {
             outline: none;
-            border-color: #ee4d2d;
+            border-color: #c62828;
         }
         .checkout-form-group textarea {
             resize: vertical;
@@ -549,77 +715,28 @@
             grid-template-columns: 1fr 1fr;
             gap: 15px;
         }
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             body {
-                padding: 10px;
+                padding: 8px;
             }
             header {
                 flex-direction: column;
-                gap: 15px;
-                padding: 15px;
+                gap: 12px;
+                padding: 12px;
             }
             h1 {
-                font-size: 20px;
+                font-size: 18px;
             }
             .product-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 10px;
             }
-            .header-right {
-                width: 100%;
-                justify-content: space-between;
+            .filter-section {
+                flex-direction: column;
+                align-items: flex-start;
             }
-            .admin-link {
-                font-size: 12px;
-                padding: 6px 12px;
-            }
-        }
-
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .product-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                gap: 20px;
-            }
-        }
-
-        @media (min-width: 1025px) {
-            .product-grid {
-                grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            }
-        }
-
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Loading animation */
-        .loading {
-            text-align: center;
-            padding: 60px 20px;
-            font-size: 18px;
-            color: #666;
-        }
-        .loading::after {
-            content: '...';
-            animation: dots 1.5s steps(4, end) infinite;
-        }
-        @keyframes dots {
-            0%, 20% { content: '.'; }
-            40% { content: '..'; }
-            60%, 100% { content: '...'; }
         }
     </style>
 </head>
@@ -629,6 +746,9 @@
     <header>
         <h1><i class="fas fa-store"></i> CHO THUÊ TRANG PHỤC NHỚ VŨ</h1>
         <div class="header-right">
+            <button class="admin-link" onclick="showOrderStatusTab()" style="background: none; border: none; cursor: pointer;">
+                <i class="fas fa-clipboard-list"></i> Trạng Thái Đơn Hàng
+            </button>
             <a href="admin.html" class="admin-link">
                 <i class="fas fa-cog"></i> Admin
             </a>
@@ -639,8 +759,43 @@
         </div>
     </header>
 
+    <!-- Products Section -->
+    <div id="productsSection">
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <span class="filter-label">Lọc theo tag:</span>
+            <div class="filter-tags" id="filterTags">
+                <span class="filter-tag active" data-tag="all" onclick="filterByTag('all')">Tất cả</span>
+            </div>
+        </div>
+
     <div class="product-grid" id="list">
         <div class="loading">Đang tải sản phẩm...</div>
+        </div>
+    </div>
+
+    <!-- Order Status Tab Section -->
+    <div id="orderStatusTabSection" style="display: none;">
+        <div class="content-card" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 25px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 20px;">
+            <h2 style="color: #c62828; margin-bottom: 20px;">
+                <i class="fas fa-clipboard-list"></i> Tra Cứu Đơn Hàng
+            </h2>
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <input type="text" id="orderSearchInput" placeholder="Nhập mã đơn hoặc số điện thoại..." style="flex: 1; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px;">
+                <button class="btn btn-buy" onclick="searchOrder()" style="padding: 12px 24px;">
+                    <i class="fas fa-search"></i> Tìm Kiếm
+                </button>
+            </div>
+        </div>
+        <div id="orderStatusTabContent"></div>
+    </div>
+
+    <!-- Order Status Section -->
+    <div class="order-status-section" id="orderStatusSection">
+        <h3 style="color: #c62828; margin-bottom: 20px;">
+            <i class="fas fa-info-circle"></i> Trạng Thái Đơn Hàng
+        </h3>
+        <div id="orderStatusContent"></div>
     </div>
 </div>
 
@@ -673,15 +828,9 @@
                 <textarea id="checkoutAddress" required placeholder="Nhập địa chỉ đầy đủ"></textarea>
             </div>
             
-            <div class="checkout-form-row">
                 <div class="checkout-form-group">
                     <label>Ngày Trả</label>
                     <input type="date" id="checkoutReturnDate" placeholder="Chọn ngày trả">
-                </div>
-                <div class="checkout-form-group">
-                    <label>Người Lập Phiếu</label>
-                    <input type="text" id="checkoutCreator" placeholder="Tên người lập">
-                </div>
             </div>
             
             <div class="checkout-form-group">
@@ -692,7 +841,7 @@
             <div style="margin-top: 25px; padding-top: 20px; border-top: 2px solid #f0f0f0;">
                 <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; margin-bottom: 20px;">
                     <span>Tổng tiền:</span>
-                    <span id="checkoutTotal" style="color: #ee4d2d;">0 đ</span>
+                    <span id="checkoutTotal" style="color: #c62828;">0 đ</span>
                 </div>
                 <div style="display: flex; gap: 10px;">
                     <button type="button" class="btn btn-cart" onclick="closeCheckoutModal()" style="flex: 1;">
@@ -707,6 +856,14 @@
     </div>
 </div>
 
+<!-- Order Status Section -->
+<div class="order-status-section" id="orderStatusSection">
+    <h3 style="color: #c62828; margin-bottom: 20px;">
+        <i class="fas fa-info-circle"></i> Trạng Thái Đơn Hàng
+    </h3>
+    <div id="orderStatusContent"></div>
+</div>
+
 <!-- Modal Giỏ hàng -->
 <div class="cart-modal" id="cartModal">
     <div class="cart-content">
@@ -718,7 +875,7 @@
         <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #eee;">
             <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; margin-bottom: 15px;">
                 <span>Tổng tiền:</span>
-                <span id="cartTotal" style="color: #ee4d2d;">0 đ</span>
+                <span id="cartTotal" style="color: #c62828;">0 đ</span>
             </div>
             <button class="btn btn-buy" onclick="checkout()" style="width: 100%;">
                 <i class="fas fa-credit-card"></i> Thanh toán
@@ -744,14 +901,36 @@
     // 2. QUẢN LÝ GIỎ HÀNG
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let products = [];
+    let currentFilterTag = 'all';
+    let productImageIndices = {}; // Track current image index for each product
+
+    // Extract tag from product name (simple heuristic)
+    function extractTag(productName) {
+        const name = productName.toLowerCase();
+        // Common tags based on keywords
+        if (name.includes('váy') || name.includes('dress')) return 'Váy';
+        if (name.includes('áo') || name.includes('shirt') || name.includes('blouse')) return 'Áo';
+        if (name.includes('quần') || name.includes('pants')) return 'Quần';
+        if (name.includes('đầm')) return 'Đầm';
+        if (name.includes('cưới') || name.includes('wedding')) return 'Cưới';
+        if (name.includes('dạ hội') || name.includes('party')) return 'Dạ Hội';
+        return 'Khác';
+    }
 
     // Load sản phẩm từ Firebase
     function loadProducts() {
         db.collection('products').get().then((snapshot) => {
             products = [];
             snapshot.forEach((doc) => {
-                products.push({ id: doc.id, ...doc.data() });
+                const data = doc.data();
+                if (data.deleted !== true) {
+                    const product = { id: doc.id, ...data };
+                    // Extract or use existing tag
+                    product.tag = product.tag || extractTag(product.name || '');
+                    products.push(product);
+                }
             });
+            renderFilterTags();
             renderProducts();
             updateCartCount();
         }).catch((error) => {
@@ -760,17 +939,102 @@
         });
     }
 
+    // Render filter tags
+    function renderFilterTags() {
+        const tags = new Set(['all']);
+        products.forEach(p => {
+            if (p.tag) tags.add(p.tag);
+        });
+        
+        const container = document.getElementById('filterTags');
+        container.innerHTML = '';
+        Array.from(tags).sort().forEach(tag => {
+            const span = document.createElement('span');
+            span.className = 'filter-tag' + (tag === currentFilterTag ? ' active' : '');
+            span.textContent = tag === 'all' ? 'Tất cả' : tag;
+            span.setAttribute('data-tag', tag);
+            span.onclick = () => filterByTag(tag);
+            container.appendChild(span);
+        });
+    }
+
+    // Filter by tag
+    function filterByTag(tag) {
+        currentFilterTag = tag;
+        document.querySelectorAll('.filter-tag').forEach(el => {
+            el.classList.toggle('active', el.getAttribute('data-tag') === tag);
+        });
+        renderProducts();
+    }
+
+    // Navigate product images
+    function nextImage(productId, direction) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+        
+        const productImages = (product.images && Array.isArray(product.images) && product.images.length > 0) 
+            ? product.images 
+            : (product.image ? [product.image] : []);
+        
+        if (productImages.length <= 1) return;
+        
+        if (!productImageIndices[productId]) productImageIndices[productId] = 0;
+        
+        if (direction === 'next') {
+            productImageIndices[productId] = (productImageIndices[productId] + 1) % productImages.length;
+        } else {
+            productImageIndices[productId] = (productImageIndices[productId] - 1 + productImages.length) % productImages.length;
+        }
+        
+        updateProductImage(productId);
+    }
+
+    function updateProductImage(productId) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+        
+        const productImages = (product.images && Array.isArray(product.images) && product.images.length > 0) 
+            ? product.images 
+            : (product.image ? [product.image] : []);
+        
+        const imgElement = document.querySelector(`[data-product-id="${productId}"] .image-box img`);
+        const dotsContainer = document.querySelector(`[data-product-id="${productId}"] .image-indicator`);
+        
+        if (imgElement && productImages.length > 0) {
+            const currentIndex = productImageIndices[productId] || 0;
+            imgElement.src = productImages[currentIndex];
+        }
+        
+        if (dotsContainer) {
+            dotsContainer.innerHTML = '';
+            productImages.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'image-dot' + (index === (productImageIndices[productId] || 0) ? ' active' : '');
+                dot.onclick = () => {
+                    productImageIndices[productId] = index;
+                    updateProductImage(productId);
+                };
+                dotsContainer.appendChild(dot);
+            });
+        }
+    }
+
     // Render sản phẩm
     function renderProducts() {
         const container = document.getElementById('list');
         container.innerHTML = '';
 
-        if (products.length === 0) {
-            container.innerHTML = '<div class="loading">Chưa có sản phẩm nào. Vui lòng thêm sản phẩm từ trang Admin.</div>';
+        let filteredProducts = products;
+        if (currentFilterTag !== 'all') {
+            filteredProducts = products.filter(p => p.tag === currentFilterTag);
+        }
+
+        if (filteredProducts.length === 0) {
+            container.innerHTML = '<div class="loading">Không có sản phẩm nào với tag này.</div>';
             return;
         }
 
-        products.forEach(p => {
+        filteredProducts.forEach(p => {
             // Tính toán số lượng
             const totalStock = Object.values(p.sizes || {}).reduce((acc, curr) => acc + curr, 0);
             const available = totalStock - (p.renting || 0);
@@ -788,14 +1052,25 @@
             const productImages = (p.images && Array.isArray(p.images) && p.images.length > 0) 
                 ? p.images 
                 : (p.image ? [p.image] : ['https://via.placeholder.com/300']);
-            const mainImage = productImages[0];
+            const currentIndex = productImageIndices[p.id] || 0;
+            const mainImage = productImages[currentIndex];
             const imageCount = productImages.length;
+            const hasMultipleImages = imageCount > 1;
+            
+            const imageNavHtml = hasMultipleImages ? `
+                <button class="image-nav prev" onclick="nextImage('${p.id}', 'prev')"><i class="fas fa-chevron-left"></i></button>
+                <button class="image-nav next" onclick="nextImage('${p.id}', 'next')"><i class="fas fa-chevron-right"></i></button>
+                <div class="image-indicator">
+                    ${productImages.map((_, idx) => `<div class="image-dot ${idx === currentIndex ? 'active' : ''}" onclick="productImageIndices['${p.id}'] = ${idx}; updateProductImage('${p.id}');"></div>`).join('')}
+                </div>
+            ` : '';
             
             const html = `
-            <div class="product-card">
+            <div class="product-card" data-product-id="${p.id}">
                 <div class="image-box">
-                    <img src="${mainImage}" onerror="this.src='https://via.placeholder.com/300'">
-                    ${imageCount > 1 ? `<div class="image-count-badge">${imageCount} ảnh</div>` : ''}
+                    <img src="${mainImage}" onerror="this.src='https://via.placeholder.com/300'" onclick="openImageModal('${p.id}')">
+                    ${hasMultipleImages ? `<div class="image-count-badge">${imageCount} ảnh</div>` : ''}
+                    ${imageNavHtml}
                     ${overlayHtml}
                 </div>
                 
@@ -807,30 +1082,27 @@
                         ${sizeHtml}
                     </div>
 
-                    <div class="price-row" style="justify-content: center;">
-                        <div class="p-block">
-                            <span class="p-label">Giá Thuê</span>
-                            <span class="price-rent" style="font-size: 24px;">${formatMoney(p.rentPrice || 0)}</span>
-                        </div>
+                    <div class="price-row">
+                        <span class="price-rent">${formatMoney(p.rentPrice || 0)}</span>
                     </div>
 
                     <div class="stock-info">
                         <div class="stock-item">
-                            <span class="stock-label">📦 Tổng số:</span>
+                            <span class="stock-label">📦 Tổng:</span>
                             <span class="stock-value">${totalStock}</span>
                         </div>
                         <div class="stock-item">
-                            <span class="stock-label">✅ Còn lại:</span>
-                            <span class="stock-value" style="color:${isOutOfStock ? '#dc3545' : '#28a745'}; font-weight: 700;">${available}</span>
+                            <span class="stock-label">✅ Còn:</span>
+                            <span class="stock-value" style="color:${isOutOfStock ? '#c62828' : '#2e7d32'}; font-weight: 700;">${available}</span>
                         </div>
                     </div>
 
                     <div class="action-area">
                         <button class="btn btn-cart ${btnState}" ${isOutOfStock ? '' : `onclick="addToCart('${p.id}')"`}>
-                            <i class="fas fa-cart-plus" style="margin-right:8px"></i> Thêm
+                            <i class="fas fa-cart-plus"></i>
                         </button>
                         <button class="btn btn-buy ${btnState}" ${isOutOfStock ? '' : `onclick="buyNow('${p.id}')"`}>
-                            Lên đơn ngay
+                            Mua
                         </button>
                     </div>
                 </div>
@@ -975,7 +1247,6 @@
         const customerAddress = document.getElementById('checkoutAddress').value.trim();
         const rentalDate = document.getElementById('checkoutRentalDate').value;
         const returnDate = document.getElementById('checkoutReturnDate').value;
-        const creator = document.getElementById('checkoutCreator').value.trim();
         const notes = document.getElementById('checkoutNotes').value.trim();
 
         if (!customerName || !customerPhone || !customerAddress || !rentalDate) {
@@ -990,7 +1261,6 @@
             customerAddress,
             rentalDate,
             returnDate: returnDate || '',
-            creator: creator || '',
             notes: notes || '',
             items: cart.map(item => ({
                 productId: item.id,
@@ -1005,11 +1275,18 @@
 
         // Lưu vào Firebase và đồng bộ Google Sheets
         syncService.saveOrder(order).then((orderId) => {
-            alert('Đặt hàng thành công! Đang chuyển đến hóa đơn...');
+            // Lưu vào danh sách đơn hàng của tôi
+            let myOrders = JSON.parse(localStorage.getItem('myOrders') || '[]');
+            myOrders.push({
+                orderId: orderId,
+                order: { ...order, id: orderId },
+                createdAt: new Date().toISOString()
+            });
+            localStorage.setItem('myOrders', JSON.stringify(myOrders));
             
-            // Lưu orderId vào localStorage để hoadon.html sử dụng
+            // Lưu orderId vào localStorage để theo dõi trạng thái
             localStorage.setItem('currentOrderId', orderId);
-            localStorage.setItem('currentOrder', JSON.stringify(order));
+            localStorage.setItem('currentOrder', JSON.stringify({ ...order, id: orderId }));
             
             // Xóa giỏ hàng
             cart = [];
@@ -1018,12 +1295,496 @@
             closeCart();
             closeCheckoutModal();
             
-            // Chuyển đến trang hóa đơn
-            window.location.href = 'hoadon.html';
+            // Hiển thị modal với mã đơn
+            showOrderSuccessModal(orderId);
         }).catch((error) => {
             console.error('Lỗi tạo đơn hàng:', error);
-            alert('Có lỗi xảy ra. Vui lòng thử lại.');
+            showToast('Có lỗi xảy ra. Vui lòng thử lại.', 'error');
         });
+    }
+
+    // Toast notification
+    function showToast(message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-exclamation-triangle';
+        toast.innerHTML = `<i class="fas ${icon}"></i> <span>${message}</span>`;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.animation = 'slideInRight 0.3s ease-out reverse';
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    // Show order status
+    function showOrderStatus(orderId, order) {
+        const section = document.getElementById('orderStatusSection');
+        const content = document.getElementById('orderStatusContent');
+        
+        const statusText = {
+            'pending': 'Chờ Xử Lý',
+            'confirmed': 'Đã Xác Nhận',
+            'completed': 'Hoàn Thành',
+            'cancelled': 'Đã Hủy'
+        };
+        
+        content.innerHTML = `
+            <div class="order-status-card">
+                <div class="order-status-header">
+                    <div>
+                        <div style="font-size: 12px; color: #666; margin-bottom: 5px;">Mã Đơn Hàng</div>
+                        <div style="font-size: 18px; font-weight: 800; color: #333;">${orderId.substring(0, 12)}...</div>
+                    </div>
+                    <span class="order-status-badge ${order.status}">${statusText[order.status] || 'Chờ Xử Lý'}</span>
+                </div>
+                <div style="margin-top: 15px;">
+                    <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+                        <i class="fas fa-user"></i> <strong>${order.customerName}</strong>
+                    </div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+                        <i class="fas fa-phone"></i> ${order.customerPhone}
+                    </div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+                        <i class="fas fa-map-marker-alt"></i> ${order.customerAddress}
+                    </div>
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e0e0e0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 14px; color: #666;">Tổng tiền:</span>
+                            <span style="font-size: 20px; font-weight: 800; color: #c62828;">${formatMoney(order.total)}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        section.classList.add('active');
+        section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        // Check order status periodically
+        checkOrderStatus(orderId);
+    }
+
+    // Check order status
+    function checkOrderStatus(orderId) {
+        if (typeof waitForDb === 'function') {
+            waitForDb().then(db => {
+                db.collection('orders').doc(orderId).onSnapshot(doc => {
+                    if (doc.exists) {
+                        const order = doc.data();
+                        const content = document.getElementById('orderStatusContent');
+                        const statusText = {
+                            'pending': 'Chờ Xử Lý',
+                            'confirmed': 'Đã Xác Nhận',
+                            'completed': 'Hoàn Thành',
+                            'cancelled': 'Đã Hủy'
+                        };
+                        
+                        const badge = content.querySelector('.order-status-badge');
+                        if (badge) {
+                            badge.className = `order-status-badge ${order.status}`;
+                            badge.textContent = statusText[order.status] || 'Chờ Xử Lý';
+                        }
+                        
+                        // Show notification when status changes
+                        if (order.status === 'confirmed') {
+                            showToast('Đơn hàng của bạn đã được xác nhận!', 'success');
+                        } else if (order.status === 'completed') {
+                            showToast('Đơn hàng đã hoàn thành!', 'success');
+                        } else if (order.status === 'cancelled') {
+                            showToast('Đơn hàng đã bị hủy.', 'error');
+                        }
+                    }
+                });
+            });
+        }
+    }
+
+    // Show Products Tab
+    function showProductsTab() {
+        document.getElementById('productsSection').style.display = 'block';
+        document.getElementById('orderStatusTabSection').style.display = 'none';
+        document.querySelectorAll('.main-tab-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    // Show Order Status Tab
+    function showOrderStatusTab() {
+        document.getElementById('productsSection').style.display = 'none';
+        document.getElementById('orderStatusTabSection').style.display = 'block';
+        document.querySelectorAll('.main-tab-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        // Load orders from localStorage or search
+        loadCustomerOrders();
+    }
+
+    // Load customer orders
+    function loadCustomerOrders() {
+        const container = document.getElementById('orderStatusTabContent');
+        const myOrders = JSON.parse(localStorage.getItem('myOrders') || '[]');
+        
+        if (myOrders.length === 0) {
+            container.innerHTML = '<div style="text-align: center; padding: 40px; color: #999;">Chưa có đơn hàng nào. Hãy đặt hàng để xem trạng thái!</div>';
+            return;
+        }
+        
+        // Show all orders in grid
+        container.innerHTML = '<div class="order-list-grid"></div>';
+        const grid = container.querySelector('.order-list-grid');
+        
+        // Sort by date (newest first)
+        myOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        
+        myOrders.forEach(({ orderId, order }) => {
+            renderOrderCard(orderId, order, grid);
+            
+            // Listen for status updates
+            if (typeof waitForDb === 'function') {
+                waitForDb().then(db => {
+                    db.collection('orders').doc(orderId).onSnapshot(doc => {
+                        if (doc.exists) {
+                            const updatedOrder = { id: doc.id, ...doc.data() };
+                            // Update the card
+                            const card = grid.querySelector(`[data-order-id="${orderId}"]`);
+                            if (card) {
+                                const newCard = document.createElement('div');
+                                renderOrderCard(doc.id, updatedOrder, newCard);
+                                card.replaceWith(newCard);
+                            }
+                            
+                            // Update localStorage
+                            const updatedMyOrders = myOrders.map(item => 
+                                item.orderId === orderId 
+                                    ? { ...item, order: updatedOrder }
+                                    : item
+                            );
+                            localStorage.setItem('myOrders', JSON.stringify(updatedMyOrders));
+                            
+                            // Show notification when status changes
+                            if (updatedOrder.status === 'confirmed') {
+                                showToast('Đơn hàng của bạn đã được xác nhận!', 'success');
+                            } else if (updatedOrder.status === 'completed') {
+                                showToast('Đơn hàng đã hoàn thành!', 'success');
+                            } else if (updatedOrder.status === 'cancelled') {
+                                showToast('Đơn hàng đã bị hủy.', 'error');
+                            }
+                        }
+                    });
+                });
+            }
+        });
+    }
+
+    // Search order
+    function searchOrder() {
+        const searchValue = document.getElementById('orderSearchInput').value.trim();
+        if (!searchValue) {
+            showToast('Vui lòng nhập mã đơn hoặc số điện thoại', 'warning');
+            return;
+        }
+
+        if (typeof waitForDb === 'function') {
+            waitForDb().then(db => {
+                const container = document.getElementById('orderStatusTabContent');
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: #999;">Đang tìm kiếm...</div>';
+                
+                // Check if searchValue looks like an order ID (starts with TPNV_)
+                const isOrderId = searchValue.startsWith('TPNV_') || searchValue.length > 10;
+                
+                // Try to find by order ID first
+                if (isOrderId) {
+                    // First try to find by orderIdNew field
+                    db.collection('orders').where('orderIdNew', '==', searchValue)
+                        .limit(1)
+                        .get().then(snapshot => {
+                            if (!snapshot.empty) {
+                                // Found by orderIdNew
+                                snapshot.forEach(doc => {
+                                    const order = { id: doc.id, ...doc.data() };
+                                    container.innerHTML = '<div class="order-list-grid"></div>';
+                                    const grid = container.querySelector('.order-list-grid');
+                                    renderOrderCard(doc.id, order, grid);
+                                    
+                                    // Save to localStorage
+                                    let myOrders = JSON.parse(localStorage.getItem('myOrders') || '[]');
+                                    const existingIndex = myOrders.findIndex(item => item.orderId === doc.id);
+                                    if (existingIndex === -1) {
+                                        myOrders.push({
+                                            orderId: doc.id,
+                                            order: order,
+                                            createdAt: order.createdAt ? (order.createdAt.seconds ? new Date(order.createdAt.seconds * 1000).toISOString() : new Date().toISOString()) : new Date().toISOString()
+                                        });
+                                        localStorage.setItem('myOrders', JSON.stringify(myOrders));
+                                    }
+                                    
+                                    // Listen for updates
+                                    db.collection('orders').doc(doc.id).onSnapshot(updatedDoc => {
+                                        if (updatedDoc.exists) {
+                                            const updatedOrder = { id: updatedDoc.id, ...updatedDoc.data() };
+                                            const card = grid.querySelector(`[data-order-id="${doc.id}"]`);
+                                            if (card) {
+                                                const newCard = document.createElement('div');
+                                                renderOrderCard(updatedDoc.id, updatedOrder, newCard);
+                                                card.replaceWith(newCard);
+                                            }
+                                        }
+                                    });
+                                });
+                            } else {
+                                // Not found by orderIdNew, try by document ID
+                                db.collection('orders').doc(searchValue).get().then(doc => {
+                                    if (doc.exists) {
+                                        const order = { id: doc.id, ...doc.data() };
+                                        container.innerHTML = '<div class="order-list-grid"></div>';
+                                        const grid = container.querySelector('.order-list-grid');
+                                        renderOrderCard(doc.id, order, grid);
+                                        
+                                        // Save to localStorage
+                                        let myOrders = JSON.parse(localStorage.getItem('myOrders') || '[]');
+                                        const existingIndex = myOrders.findIndex(item => item.orderId === doc.id);
+                                        if (existingIndex === -1) {
+                                            myOrders.push({
+                                                orderId: doc.id,
+                                                order: order,
+                                                createdAt: order.createdAt ? (order.createdAt.seconds ? new Date(order.createdAt.seconds * 1000).toISOString() : new Date().toISOString()) : new Date().toISOString()
+                                            });
+                                            localStorage.setItem('myOrders', JSON.stringify(myOrders));
+                                        }
+                                        
+                                        // Listen for updates
+                                        db.collection('orders').doc(doc.id).onSnapshot(updatedDoc => {
+                                            if (updatedDoc.exists) {
+                                                const updatedOrder = { id: updatedDoc.id, ...updatedDoc.data() };
+                                                const card = grid.querySelector(`[data-order-id="${doc.id}"]`);
+                                                if (card) {
+                                                    const newCard = document.createElement('div');
+                                                    renderOrderCard(updatedDoc.id, updatedOrder, newCard);
+                                                    card.replaceWith(newCard);
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        // Not found by ID, try by phone
+                                        searchByPhone(db, searchValue, container);
+                                    }
+                                }).catch(error => {
+                                    console.error('Lỗi tìm kiếm theo mã đơn:', error);
+                                    // Try by phone as fallback
+                                    searchByPhone(db, searchValue, container);
+                                });
+                            }
+                        }).catch(error => {
+                            console.error('Lỗi tìm kiếm theo orderIdNew:', error);
+                            // Fallback: try by document ID
+                            db.collection('orders').doc(searchValue).get().then(doc => {
+                                if (doc.exists) {
+                                    const order = { id: doc.id, ...doc.data() };
+                                    container.innerHTML = '<div class="order-list-grid"></div>';
+                                    const grid = container.querySelector('.order-list-grid');
+                                    renderOrderCard(doc.id, order, grid);
+                                } else {
+                                    searchByPhone(db, searchValue, container);
+                                }
+                            }).catch(() => {
+                                searchByPhone(db, searchValue, container);
+                            });
+                        });
+                } else {
+                    // Search by phone number
+                    searchByPhone(db, searchValue, container);
+                }
+            }).catch(error => {
+                console.error('Lỗi kết nối database:', error);
+                showToast('Không thể kết nối database. Vui lòng thử lại.', 'error');
+                document.getElementById('orderStatusTabContent').innerHTML = '<div style="text-align: center; padding: 40px; color: #999;">Lỗi kết nối</div>';
+            });
+        } else {
+            showToast('Database chưa sẵn sàng. Vui lòng thử lại.', 'error');
+        }
+    }
+
+    // Search by phone number
+    function searchByPhone(db, phoneNumber, container) {
+        // Try without orderBy first (in case index doesn't exist)
+        db.collection('orders').where('customerPhone', '==', phoneNumber)
+            .limit(20)
+            .get().then(snapshot => {
+                if (snapshot.empty) {
+                    container.innerHTML = '<div style="text-align: center; padding: 40px; color: #999;">Không tìm thấy đơn hàng nào với số điện thoại này</div>';
+                } else {
+                    container.innerHTML = '<div class="order-list-grid"></div>';
+                    const grid = container.querySelector('.order-list-grid');
+                    const orders = [];
+                    snapshot.forEach(doc => {
+                        orders.push({ id: doc.id, ...doc.data() });
+                    });
+                    
+                    // Sort by createdAt manually (newest first)
+                    orders.sort((a, b) => {
+                        const aTime = a.createdAt?.seconds || (a.createdAt ? new Date(a.createdAt).getTime() : 0);
+                        const bTime = b.createdAt?.seconds || (b.createdAt ? new Date(b.createdAt).getTime() : 0);
+                        return bTime - aTime;
+                    });
+                    
+                    orders.forEach(order => {
+                        renderOrderCard(order.id, order, grid);
+                    });
+                    
+                    // Save to localStorage
+                    let myOrders = JSON.parse(localStorage.getItem('myOrders') || '[]');
+                    orders.forEach(order => {
+                        const existingIndex = myOrders.findIndex(item => item.orderId === order.id);
+                        if (existingIndex === -1) {
+                            myOrders.push({
+                                orderId: order.id,
+                                order: order,
+                                createdAt: order.createdAt ? (order.createdAt.seconds ? new Date(order.createdAt.seconds * 1000).toISOString() : new Date().toISOString()) : new Date().toISOString()
+                            });
+                        }
+                    });
+                    localStorage.setItem('myOrders', JSON.stringify(myOrders));
+                }
+            }).catch(error => {
+                console.error('Lỗi tìm kiếm theo số điện thoại:', error);
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: #999;">Lỗi tìm kiếm. Vui lòng thử lại.</div>';
+                showToast('Lỗi tìm kiếm. Vui lòng thử lại.', 'error');
+            });
+    }
+
+    // Render order card
+    function renderOrderCard(orderId, order, container) {
+        const card = document.createElement('div');
+        card.className = 'order-status-card';
+        const displayOrderId = order?.orderIdNew || orderId;
+        card.setAttribute('data-order-id', orderId);
+        
+        const statusText = {
+            'pending': 'Chờ Xử Lý',
+            'confirmed': 'Đã Xác Nhận',
+            'completed': 'Hoàn Thành',
+            'cancelled': 'Đã Hủy'
+        };
+        
+        const itemsCount = order.items ? order.items.reduce((sum, item) => sum + item.quantity, 0) : 0;
+        const itemsList = order.items ? order.items.map(item => `${item.name} (x${item.quantity})`).join(', ') : '';
+        
+        card.innerHTML = `
+            <div class="order-status-header">
+                <div>
+                    <div style="font-size: 12px; color: #666; margin-bottom: 5px;">Mã Đơn Hàng</div>
+                    <div style="font-size: 18px; font-weight: 800; color: #333; word-break: break-all;">${displayOrderId}</div>
+                </div>
+                <span class="order-status-badge ${order.status}">${statusText[order.status] || 'Chờ Xử Lý'}</span>
+            </div>
+            <div style="margin-top: 15px;">
+                <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+                    <i class="fas fa-user"></i> <strong>${order.customerName || 'N/A'}</strong>
+                </div>
+                <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+                    <i class="fas fa-phone"></i> ${order.customerPhone || 'N/A'}
+                </div>
+                <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+                    <i class="fas fa-map-marker-alt"></i> ${order.customerAddress || 'N/A'}
+                </div>
+                <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; margin: 15px 0;">
+                    <div style="font-size: 12px; color: #666; margin-bottom: 5px;">Sản phẩm (${itemsCount} SP)</div>
+                    <div style="font-size: 13px; color: #333; line-height: 1.5;">${itemsList || 'N/A'}</div>
+                </div>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e0e0e0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 14px; color: #666;">Tổng tiền:</span>
+                        <span style="font-size: 20px; font-weight: 800; color: #c62828;">${formatMoney(order.total || 0)}</span>
+                    </div>
+                </div>
+                ${order.createdAt ? `
+                    <div style="font-size: 12px; color: #999; margin-top: 10px;">
+                        <i class="fas fa-calendar"></i> ${formatDate(order.createdAt)}
+                    </div>
+                ` : ''}
+            </div>
+        `;
+        
+        if (container.classList && container.classList.contains('order-list-grid')) {
+            container.appendChild(card);
+        } else if (container.appendChild) {
+            container.appendChild(card);
+        } else {
+            container.innerHTML = '';
+            const grid = document.createElement('div');
+            grid.className = 'order-list-grid';
+            grid.appendChild(card);
+            container.appendChild(grid);
+        }
+    }
+
+    // Show order success modal with order code
+    function showOrderSuccessModal(orderId) {
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        `;
+        
+        modal.innerHTML = `
+            <div style="background: white; padding: 30px; border-radius: 15px; max-width: 500px; width: 90%; text-align: center;">
+                <div style="font-size: 48px; color: #28a745; margin-bottom: 20px;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2 style="color: #c62828; margin-bottom: 20px;">Đặt Hàng Thành Công!</h2>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <div style="font-size: 14px; color: #666; margin-bottom: 10px;">Mã Đơn Hàng Của Bạn:</div>
+                    <div style="font-size: 24px; font-weight: 800; color: #c62828; word-break: break-all; padding: 10px; background: white; border-radius: 8px; border: 2px dashed #c62828;">
+                        ${orderId}
+                    </div>
+                    <div style="font-size: 12px; color: #999; margin-top: 10px;">
+                        Vui lòng lưu mã này để tra cứu trạng thái đơn hàng
+                    </div>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button onclick="this.closest('div[style*=\"position: fixed\"]').remove(); showOrderStatusTab();" style="flex: 1; padding: 12px; background: #c62828; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                        <i class="fas fa-clipboard-list"></i> Xem Trạng Thái
+                    </button>
+                    <button onclick="this.closest('div[style*=\"position: fixed\"]').remove();" style="flex: 1; padding: 12px; background: #6c757d; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                        Đóng
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        modal.onclick = function(e) {
+            if (e.target === modal) {
+                modal.remove();
+            }
+        };
+    }
+
+    // Format date helper
+    function formatDate(timestamp) {
+        if (!timestamp) return '';
+        let date;
+        if (timestamp.seconds) {
+            date = new Date(timestamp.seconds * 1000);
+        } else if (timestamp instanceof Date) {
+            date = timestamp;
+        } else {
+            date = new Date(timestamp);
+        }
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        return `${hours}:${minutes} ${day}/${month}/${year}`;
     }
 
     // Khởi tạo
@@ -1049,6 +1810,100 @@
     document.getElementById('checkoutModal').addEventListener('click', (e) => {
         if (e.target.id === 'checkoutModal') {
             closeCheckoutModal();
+        }
+    });
+</script>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal" onclick="if(event.target.id === 'imageModal') closeImageModal()">
+        <button class="image-modal-close" onclick="event.stopPropagation(); closeImageModal();">
+            <i class="fas fa-times"></i>
+        </button>
+        <button class="image-modal-nav prev" onclick="event.stopPropagation(); modalPrevImage();">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="image-modal-content" onclick="event.stopPropagation()">
+            <img id="modalImage" src="" alt="" onclick="event.stopPropagation()">
+        </div>
+        <button class="image-modal-nav next" onclick="event.stopPropagation(); modalNextImage();">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="image-modal-counter" onclick="event.stopPropagation()">
+            <span id="modalImageCounter">1 / 1</span>
+        </div>
+    </div>
+
+    <script>
+        let modalProductId = null;
+        let modalCurrentIndex = 0;
+        let modalImages = [];
+
+        function openImageModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            modalProductId = productId;
+            modalImages = (product.images && Array.isArray(product.images) && product.images.length > 0) 
+                ? product.images 
+                : (product.image ? [product.image] : []);
+            
+            if (modalImages.length === 0) return;
+
+            // Use current index from product card if available
+            modalCurrentIndex = productImageIndices[productId] || 0;
+            if (modalCurrentIndex >= modalImages.length) modalCurrentIndex = 0;
+
+            updateModalImage();
+            document.getElementById('imageModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateModalImage() {
+            if (modalImages.length === 0) return;
+            
+            const img = document.getElementById('modalImage');
+            img.src = modalImages[modalCurrentIndex];
+            
+            // Update counter
+            document.getElementById('modalImageCounter').textContent = `${modalCurrentIndex + 1} / ${modalImages.length}`;
+            
+            // Show/hide nav buttons
+            const prevBtn = document.querySelector('.image-modal-nav.prev');
+            const nextBtn = document.querySelector('.image-modal-nav.next');
+            if (prevBtn) prevBtn.style.display = modalImages.length > 1 ? 'flex' : 'none';
+            if (nextBtn) nextBtn.style.display = modalImages.length > 1 ? 'flex' : 'none';
+        }
+
+        function modalNextImage(e) {
+            if (e) e.stopPropagation();
+            if (modalImages.length === 0) return;
+            modalCurrentIndex = (modalCurrentIndex + 1) % modalImages.length;
+            updateModalImage();
+        }
+
+        function modalPrevImage(e) {
+            if (e) e.stopPropagation();
+            if (modalImages.length === 0) return;
+            modalCurrentIndex = (modalCurrentIndex - 1 + modalImages.length) % modalImages.length;
+            updateModalImage();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            const modal = document.getElementById('imageModal');
+            if (!modal.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') {
+                closeImageModal();
+            } else if (e.key === 'ArrowLeft') {
+                modalPrevImage();
+            } else if (e.key === 'ArrowRight') {
+                modalNextImage();
         }
     });
 </script>
